@@ -32,7 +32,7 @@ Results Metric::calculate_average_b_factors() {
                 continue;
             }
 
-            float average_b_factor = calculate_average_b_factor(monomer, 1);
+            float average_b_factor = calculate_average_b_factor(monomer, 30);
             ResidueResults residue_data;
             residue_data.name = monomer.type();
             residue_data.value = average_b_factor;
@@ -73,7 +73,7 @@ Results Metric::calculate_max_b_factors() {
                 continue;
             }
 
-            float max_b_factor = calculate_max_b_factor(monomer, 1);
+            float max_b_factor = calculate_max_b_factor(monomer, 30);
             ResidueResults residue_data;
             residue_data.name = monomer.type();
             residue_data.value = max_b_factor;

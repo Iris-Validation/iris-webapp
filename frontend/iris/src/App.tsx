@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { SVG, Svg } from '@svgdotjs/svg.js'
 import styles from "./index.css"
 
-function calculate_poly_line(radius: number, data: Array<number>) {
+function calculate_poly_line(center: Array<number>, radius: number, data: Array<number>) {
   const header = 40
   const gap = (360 - header) / data.length
 
@@ -14,36 +14,34 @@ function calculate_poly_line(radius: number, data: Array<number>) {
     let angle = (header / 2 + gap * i) * (Math.PI / 180)
 
     if (i == 1) {
-      const x = radius * Math.sin(angle)
-      const y = -radius * Math.cos(angle)
+      const x = center[0] + radius * Math.sin(angle)
+      const y = center[1] - radius * Math.cos(angle)
       poly_list += x
       poly_list += ","
       poly_list += y
       poly_list += " "
     }
 
-    const x = (data[i] + radius) * Math.sin(angle)
-    const y = -(data[i] + radius) * Math.cos(angle)
+    const x = center[0] + (data[i] + radius) * Math.sin(angle)
+    const y = center[1] - (data[i] + radius) * Math.cos(angle)
     poly_list += x
     poly_list += ","
     poly_list += y
     poly_list += " "
 
     if (i == data.length - 1) {
-      const x = radius * Math.sin(angle)
-      const y = -radius * Math.cos(angle)
+      const x = center[0] + radius * Math.sin(angle)
+      const y = center[1] - radius * Math.cos(angle)
       poly_list += x
       poly_list += ","
       poly_list += y
       poly_list += " "
     }
-
-
   }
   return poly_list
 }
 
-function calculate_poly_line_for_circle(center, radius: number) {
+function calculate_poly_line_for_circle(center: Array<number>, radius: number) {
   const header = 40
   const gap = (360 - header)
 
@@ -171,20 +169,25 @@ function get_values(dataset: any, chain: string) {
   return values
 }
 
+function calculate_center_line(center: Array<number>, angle: number, radius: number) {
+  angle = angle * (Math.PI / 180)
+  const x = center[0] + radius * Math.sin(angle)
+  const y = center[1] - radius * Math.cos(angle)
+  return `${center[0]},${center[1]} ${x},${y}`
+}
+
 function App() {
+  let center = [500, 500]
 
   const [averageBFactorData, setAverageBFactorData] = useState();
   const [maxBFactorData, setMaxBFactorData] = useState();
   const [chainListSet, setChainListSet] = useState(false);
   const [chainList, setChainList] = useState(false);
   const [selectedChain, setSelectedChain] = useState();
-  const [canvas, setCanvas] = useState();
-  const [currentPoints, setCurrentPoints] = useState();
-  const [currentPoints2, setCurrentPoints2] = useState();
 
-
-  const width = window.innerWidth
-  const height = window.innerHeight - 10
+  const [avgBFacPoints, setAvgBFacPoints] = useState();
+  const [maxBFacPoints, setMaxBFacPoints] = useState();
+  const [centerLinePoints, setCenterLinePoints] = useState()
 
   useEffect(() => {
 
@@ -194,7 +197,6 @@ function App() {
       let avg_b_factor_data = parse_result(results.average_b_factor);
       let max_b_factor_data = parse_result(results.max_b_factor);
 
-      console.log(avg_b_factor_data)
       setAverageBFactorData(avg_b_factor_data)
       setMaxBFactorData(max_b_factor_data)
 
@@ -205,64 +207,79 @@ function App() {
 
       setChainListSet(true)
       setChainList(chain_list)
-      // let values = []
-      // for (let i = 0; i < data["A"].length; i++) { 
-      //   values.push(data["A"][i].val)
-      // }
+      setSelectedChain(chain_list[0])
 
-      // const canvas = SVG()
-      // .addTo('body')
-      // .size(width, height)
-      // .viewbox(-width / 8, -height / 8, width / 4, height / 4)
-      // generate_ring(200, values, canvas)
-
-
+      let center_line = calculate_center_line(center, 20, 450)
+      setCenterLinePoints(center_line)
 
     })
 
-    const canvas = SVG()
-      .addTo('body')
-      .size(width, height)
-      .viewbox(-width / 8, -height / 8, width / 4, height / 4)
-    setCanvas(canvas)
-
-    // generate_ring(200, 10, canvas)
-    // generate_ring(140, 7, canvas)
-    // generate_ring(100, 7, canvas)
-    // generate_ring(70, 7, canvas)
   }, [])
 
 
   useEffect(() => {
-    if (averageBFactorData) { 
+
+
+    if (averageBFactorData) {
+      console.log("Average B Fac")
       let values = get_values(averageBFactorData, selectedChain)
-      const pl = calculate_poly_line(50, values)
-      const ring = calculate_poly_line_for_circle([0,0], 52)
+      let normalised = normalise_data(values)
+      const pl = calculate_poly_line(center, 400, normalised)
+      const ring = calculate_poly_line_for_circle(center, 400)
       const points = pl + ring
-    
-      setCurrentPoints(pl)
-      setCurrentPoints2(ring)
-      // generate_ring(200, values, canvas);
+
+      setAvgBFacPoints(points)
     }
 
-   }, [selectedChain])
+    if (maxBFactorData) {
+      console.log("Max B Fac")
+      let values = get_values(maxBFactorData, selectedChain)
+
+      let normalised = normalise_data(values)
+      const pl = calculate_poly_line(center, 350, normalised)
+      const ring = calculate_poly_line_for_circle(center, 350)
+      const points = pl + ring
+
+      setMaxBFacPoints(points)
+    }
+
+  }, [selectedChain])
+
+  function handle_mouse_move(e) { 
+    var bounds = e.target.getBoundingClientRect();
+    var x = e.clientX - bounds.left;
+    var y = e.clientY - bounds.top;
+     
+    var delta_x = x - center[0]
+    var delta_y = y - center[1]
+
+    var angle =(180/Math.PI) * Math.atan2(delta_y, delta_x) + 90
+
+    console.log(x, y, delta_x, delta_y, angle)
+
+    let center_line = calculate_center_line(center, angle, 450)
+    setCenterLinePoints(center_line)
+  }
 
   return (
-    <div className='flex'>
-      {chainListSet !== true ? <>Loading...</> : chainList.map((item, index) => {
-        return (
-          <button className='mx-2 w-8 h-8 align-middle text-center justify-center' key={index} onClick={() => {setSelectedChain(item)}}>
-            {item}
-          </button>
-        )
-      })}
+    <div className='flex-col'>
+      <div className='flex transition-al text-center align-center justify-center'>
+        {chainListSet !== true ? <>Loading...</> : chainList.map((item, index) => {
+          return (
+            <button className='mx-2 w-16 h-16 align-middle text-center justify-center bg-secondary' key={index} onClick={() => { setSelectedChain(item) }}>
+              {item}
+            </button>
+          )
+        })}
+      </div>
 
-  < svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" xmlnssvgjs="http://svgjs.dev/svgjs" width="964" height="1151" viewBox="-120.5 -143.875 241 287.75">
-      <polyline points={currentPoints} fill="none" strokeWidth="0.5" stroke="red" fillRule="evenodd"/>
-      <polyline points={currentPoints2} fill="none" strokeWidth="0.5" stroke="blue" fillRule="evenodd"/>
 
-  </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" xmlnssvgjs="http://svgjs.dev/svgjs" width="1000" height="1000" viewBox="0 0 1000 1000" onMouseMove={(e) => {handle_mouse_move(e)}}>
+        <polyline points={avgBFacPoints} fill="green" strokeWidth="0.5" stroke="blue" fillRule="evenodd" />
+        <polyline points={maxBFacPoints} fill="blue" strokeWidth="0.5" stroke="red" fillRule="evenodd" />
+        <polyline points={centerLinePoints} fill="gray" strokeWidth="1" stroke="gray" />
 
+      </svg>
     </div>
   )
 }
