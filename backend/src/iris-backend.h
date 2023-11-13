@@ -5,6 +5,7 @@
 struct ResidueResults { 
     std::string name; 
     float value; 
+    int seqnum;
 };
 
 struct ChainResults { 

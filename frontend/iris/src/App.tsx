@@ -20,8 +20,9 @@ function parse_result(results: any) {
       let residue_result = chain_result.results.get(j);
       let name = residue_result.name;
       let value = residue_result.value;
+      let seqnum = residue_result.seqnum; 
 
-      data[chain_id].push({ id: j, res_name: name, value: value })
+      data[chain_id].push({ id: j, res_name: name, value: value, seqnum: seqnum})
 
     }
   }
@@ -39,7 +40,7 @@ function get_values(dataset: any, chain: string) {
 function get_residue_data(results: any) {
   let residue_names = []
   for (let i = 0; i < results.length; i++) {
-    residue_names.push(`${results[i].res_name}/${i + 1}`)
+    residue_names.push(`${results[i].res_name}/${results[i].seqnum}`)
   }
   return residue_names
 }
@@ -112,6 +113,7 @@ function App() {
 
   useEffect(() => {
     if (averageBFactorData) {
+      
       let radius = 400
       let values = get_values(averageBFactorData, selectedChain)
       let normalised = normalise_data(values)
@@ -168,6 +170,13 @@ function App() {
       angle += 360
     }
 
+    if (residueData) { 
+      let gap = 320 / residueData.length 
+      // console.log(residueData.length, gap)
+      // angle = Math.ceil(angle/gap)*gap
+    }
+
+
     let highlighted_residue = get_current_residue(angle)
 
     let center_line = calculate_center_line(center, angle, 450)
@@ -177,13 +186,22 @@ function App() {
   const chainSelectionButtonsProps = {
     chainList: chainList,
     chainListSet: chainListSet,
+    selectedChain: selectedChain,
     setSelectedChain: setSelectedChain, 
+  }
+
+  const ringKurnlingProps = { 
+    center: [500,500],
+    header: 40 ,
+    radius: 450,
+    number: residueData ? residueData.length : 0,
   }
 
   return (
     <div className='flex-col'>
 
-      <div className='flex'>
+      <div className='flex h-12'>
+        <span className='text-xl h-full align-middle text-center'>Chain</span>
         <ChainSelectionButtons {...chainSelectionButtonsProps}/>
 
         <span className='text-xl text-white'>{selectedResidue}</span>
@@ -192,17 +210,17 @@ function App() {
       <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" xmlnssvgjs="http://svgjs.dev/svgjs" width="1000" height="1000" viewBox="0 0 1000 1000" onMouseMove={(e) => { handle_mouse_move(e) }}>
         
         {ringOneTextPos !== null ? 
-              <text x={ringOneTextPos[0]} y={ringOneTextPos[1]} fill='white'>{ringOneTextPos[2]}</text>: <></>
+              <text x={ringOneTextPos[0]} y={ringOneTextPos[1]} fill='gray'>{ringOneTextPos[2]}</text>: <></>
         }
 
         {ringTwoTextPos !== null ? 
-              <text x={ringTwoTextPos[0]} y={ringTwoTextPos[1]} fill='white'>{ringTwoTextPos[2]}</text>: <></>
+              <text x={ringTwoTextPos[0]} y={ringTwoTextPos[1]} fill='gray'>{ringTwoTextPos[2]}</text>: <></>
         }
 
-        <RingKnurling center={[500,500]} header={40} radius={450} number={839}/>
+        <RingKnurling {...ringKurnlingProps}/>
 
-        <polyline points={avgBFacPoints} fill="#ff758f" strokeWidth="1" stroke="#ff4d6d" fillRule="evenodd" />
-        <polyline points={maxBFacPoints} fill="#1a759f" strokeWidth="1" stroke="#1e6091" fillRule="evenodd" />
+        <polyline points={avgBFacPoints} fill="#ff758f" strokeWidth="1" stroke="#ff4d6d" fillOpacity={0.2} fillRule="evenodd" />
+        <polyline points={maxBFacPoints} fill="#1a759f" strokeWidth="1" stroke="#1e6091" fillOpacity={0.2} fillRule="evenodd" />
         <polyline points={centerLinePoints} fill="gray" strokeWidth="1" stroke="gray" />
         
       </svg>

@@ -63,6 +63,7 @@ Results Metric::calculate_average_b_factors(int scale)
             ResidueResults residue_data;
             residue_data.name = monomer.type();
             residue_data.value = average_b_factor;
+            residue_data.seqnum = monomer.seqnum();
 
             chain_results.results.emplace_back(residue_data);
         }
@@ -110,6 +111,7 @@ Results Metric::calculate_max_b_factors(int scale)
             ResidueResults residue_data;
             residue_data.name = monomer.type();
             residue_data.value = max_b_factor;
+            residue_data.seqnum = monomer.seqnum();
 
             chain_results.results.emplace_back(residue_data);
         }

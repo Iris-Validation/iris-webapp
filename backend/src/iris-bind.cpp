@@ -27,7 +27,8 @@ EMSCRIPTEN_BINDINGS(iris_module) {
 
   value_object<ResidueResults>("ResidueResults")
   .field("name", &ResidueResults::name)
-  .field("value", &ResidueResults::value);
+  .field("value", &ResidueResults::value)
+  .field("seqnum", &ResidueResults::seqnum);
 
   register_vector<ResidueResults>("vector<ResidueResults>");
 
