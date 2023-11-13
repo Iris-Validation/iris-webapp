@@ -176,11 +176,25 @@ function calculate_center_line(center: Array<number>, angle: number, radius: num
   return `${center[0]},${center[1]} ${x},${y}`
 }
 
+function get_residue_data(results: any) {
+  console.log(results);
+  let residue_names = []
+  for (let i = 0; i < results.length; i++) {
+    residue_names.push(`${results[i].res_name}/${i + 1}`)
+  }
+  return residue_names
+}
+
+
+
 function App() {
   let center = [500, 500]
 
   const [averageBFactorData, setAverageBFactorData] = useState();
   const [maxBFactorData, setMaxBFactorData] = useState();
+  const [residueData, setResidueData] = useState();
+  const [selectedResidue, setSelectedResidue] = useState();
+
   const [chainListSet, setChainListSet] = useState(false);
   const [chainList, setChainList] = useState(false);
   const [selectedChain, setSelectedChain] = useState();
@@ -189,11 +203,27 @@ function App() {
   const [maxBFacPoints, setMaxBFacPoints] = useState();
   const [centerLinePoints, setCenterLinePoints] = useState()
 
+  function get_current_residue(angle: number) {
+
+    if (residueData) {
+      let gap = residueData.length / 320
+      let delta_angle = angle - 20
+
+      let index = Math.floor(delta_angle * gap)
+      
+      if (angle == 340) { 
+        index = residueData.length-1
+      }
+
+      setSelectedResidue(residueData[index])
+    }
+  }
+
   useEffect(() => {
 
     iris_module().then((Module: any) => {
       let results = Module.test();
-      console.log(results)
+
       let avg_b_factor_data = parse_result(results.average_b_factor);
       let max_b_factor_data = parse_result(results.max_b_factor);
 
@@ -209,6 +239,7 @@ function App() {
       setChainList(chain_list)
       setSelectedChain(chain_list[0])
 
+
       let center_line = calculate_center_line(center, 20, 450)
       setCenterLinePoints(center_line)
 
@@ -218,10 +249,7 @@ function App() {
 
 
   useEffect(() => {
-
-
     if (averageBFactorData) {
-      console.log("Average B Fac")
       let values = get_values(averageBFactorData, selectedChain)
       let normalised = normalise_data(values)
       const pl = calculate_poly_line(center, 400, normalised)
@@ -229,12 +257,14 @@ function App() {
       const points = pl + ring
 
       setAvgBFacPoints(points)
+
+      let residue_data = get_residue_data(averageBFactorData[selectedChain])
+      setResidueData(residue_data)
+
     }
 
     if (maxBFactorData) {
-      console.log("Max B Fac")
       let values = get_values(maxBFactorData, selectedChain)
-
       let normalised = normalise_data(values)
       const pl = calculate_poly_line(center, 350, normalised)
       const ring = calculate_poly_line_for_circle(center, 350)
@@ -245,17 +275,31 @@ function App() {
 
   }, [selectedChain])
 
-  function handle_mouse_move(e) { 
-    var bounds = e.target.getBoundingClientRect();
-    var x = e.clientX - bounds.left;
-    var y = e.clientY - bounds.top;
-     
+  function handle_mouse_move(e) {
+    var svg = document.getElementById("svg");
+    var bounds = svg.getBoundingClientRect();
+    var x = e.clientX - bounds.x;
+    var y = e.clientY - bounds.y;
+
     var delta_x = x - center[0]
     var delta_y = y - center[1]
 
-    var angle =(180/Math.PI) * Math.atan2(delta_y, delta_x) + 90
+    var angle = (180 / Math.PI) * Math.atan2(delta_y, delta_x) + 90
 
-    console.log(x, y, delta_x, delta_y, angle)
+    if (angle > 0 && angle < 20) {
+      angle = 20
+    }
+
+    if (-20 < angle && angle < 0) {
+      angle = 340
+    }
+
+    // normalise angles
+    if (angle < 0) {
+      angle += 360
+    }
+
+    let highlighted_residue = get_current_residue(angle)
 
     let center_line = calculate_center_line(center, angle, 450)
     setCenterLinePoints(center_line)
@@ -263,18 +307,22 @@ function App() {
 
   return (
     <div className='flex-col'>
-      <div className='flex transition-al text-center align-center justify-center'>
-        {chainListSet !== true ? <>Loading...</> : chainList.map((item, index) => {
-          return (
-            <button className='mx-2 w-16 h-16 align-middle text-center justify-center bg-secondary' key={index} onClick={() => { setSelectedChain(item) }}>
-              {item}
-            </button>
-          )
-        })}
+
+      <div className='flex'>
+        <div className='flex transition-al text-center align-center justify-center'>
+          {chainListSet !== true ? <>Loading...</> : chainList.map((item, index) => {
+            return (
+              <button className='mx-2 w-16 h-16 align-middle text-center justify-center bg-secondary' key={index} onClick={() => { setSelectedChain(item) }}>
+                {item}
+              </button>
+            )
+          })}
+        </div>
+
+        <span className='text-xl text-white'>{selectedResidue}</span>
       </div>
 
-
-      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" xmlnssvgjs="http://svgjs.dev/svgjs" width="1000" height="1000" viewBox="0 0 1000 1000" onMouseMove={(e) => {handle_mouse_move(e)}}>
+      <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" xmlnssvgjs="http://svgjs.dev/svgjs" width="1000" height="1000" viewBox="0 0 1000 1000" onMouseMove={(e) => { handle_mouse_move(e) }}>
         <polyline points={avgBFacPoints} fill="green" strokeWidth="0.5" stroke="blue" fillRule="evenodd" />
         <polyline points={maxBFacPoints} fill="blue" strokeWidth="0.5" stroke="red" fillRule="evenodd" />
         <polyline points={centerLinePoints} fill="gray" strokeWidth="1" stroke="gray" />
