@@ -11,8 +11,8 @@ using namespace emscripten;
 
 MultiResults calculate() { 
   Metric metric = Metric("/5fjj.pdb");
-  Results avg_b_factor = metric.calculate_average_b_factors();
-  Results max_b_factor = metric.calculate_max_b_factors();
+  Results avg_b_factor = metric.calculate_average_b_factors(50);
+  Results max_b_factor = metric.calculate_max_b_factors(50);
 
   MultiResults results;
   results.average_b_factor = avg_b_factor; 

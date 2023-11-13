@@ -41,7 +41,7 @@ float Metric::calculate_average_b_factor(clipper::MMonomer &monomer, int scale)
     return scale * total_bfac / monomer.size();
 }
 
-Results Metric::calculate_average_b_factors()
+Results Metric::calculate_average_b_factors(int scale)
 {
     clipper::MModel m_model = m_mol.model();
 
@@ -59,7 +59,7 @@ Results Metric::calculate_average_b_factors()
                 continue;
             }
 
-            float average_b_factor = calculate_average_b_factor(monomer, 30);
+            float average_b_factor = calculate_average_b_factor(monomer, scale);
             ResidueResults residue_data;
             residue_data.name = monomer.type();
             residue_data.value = average_b_factor;
@@ -86,7 +86,7 @@ float Metric::calculate_max_b_factor(clipper::MMonomer &monomer, int scale)
     return scale * max;
 }
 
-Results Metric::calculate_max_b_factors()
+Results Metric::calculate_max_b_factors(int scale)
 {
     clipper::MModel m_model = m_mol.model();
 
@@ -106,7 +106,7 @@ Results Metric::calculate_max_b_factors()
                 continue;
             }
 
-            float max_b_factor = calculate_max_b_factor(monomer, 30);
+            float max_b_factor = calculate_max_b_factor(monomer, scale);
             ResidueResults residue_data;
             residue_data.name = monomer.type();
             residue_data.value = max_b_factor;

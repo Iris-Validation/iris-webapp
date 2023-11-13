@@ -27,8 +27,8 @@ class Metric {
 public: 
     Metric(const std::string& path);
 
-    Results calculate_average_b_factors();
-    Results calculate_max_b_factors();
+    Results calculate_average_b_factors(int scale);
+    Results calculate_max_b_factors(int scale);
 
     std::vector<std::string> get_chain_labels(); 
 
