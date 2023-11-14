@@ -14,7 +14,6 @@ struct ChainResult {
     std::vector<ResidueResult> results;
 };
 
-
 struct ResultsBinding {
     std::vector<ChainResult> result;
     std::vector<std::string> chain_labels; 
@@ -33,6 +32,14 @@ struct MaxBFactorMetric: public AbstractMetric {
     ResidueResult score(clipper::MMonomer &monomer) const override;
 };
 
+struct MainChainFit: public AbstractMetric {
+    ResidueResult score(clipper::MMonomer& monomer) const override;
+};
+
+struct SideChainFit: public AbstractMetric {
+    ResidueResult score(clipper::MMonomer& monomer) const override;
+};
+
 class CalculatedMetrics {
 public:
     CalculatedMetrics(const std::string& path, std::vector<AbstractMetric*>& metrics);
@@ -44,21 +51,3 @@ private:
     clipper::MiniMol m_mol;
 
 };
-//
-//class Metric {
-//public:
-//    Metric(const std::string& path);
-//
-//    Results calculate_average_b_factors(int scale);
-//    Results calculate_max_b_factors(int scale);
-//
-//    std::vector<std::string> get_chain_labels();
-//
-//private:
-//
-//    float calculate_average_b_factor(clipper::MMonomer& monomer, int scale = 1);
-//    float calculate_max_b_factor(clipper::MMonomer& monomer, int scale = 1);
-//
-//    clipper::MiniMol m_mol;
-//};
-

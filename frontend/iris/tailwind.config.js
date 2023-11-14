@@ -7,7 +7,7 @@ export default {
   ],
   theme: {
       colors: {
-          gray: "#D6D9E5",
+          gray: "#e0e1dd",
           primary: '#12161E',
           secondary: '#4a5568',
           tertiary: '#F4F9FF',

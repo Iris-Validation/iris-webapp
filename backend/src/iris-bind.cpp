@@ -3,22 +3,15 @@
 #include <clipper/clipper-ccp4.h>
 #include <clipper/clipper-contrib.h>
 #include <clipper/clipper-minimol.h>
+#include <fstream>
 
 #include "iris-backend.h"
+#include <iostream>
 
 using namespace emscripten; 
 
 
 ResultsBinding calculate() {
-//  Metric metric = Metric("/5fjj.pdb");
-//  Results avg_b_factor = metric.calculate_average_b_factors(50);
-//  Results max_b_factor = metric.calculate_max_b_factors(50);
-//
-//  ResultsBinding results;
-//  results.average_b_factor = avg_b_factor;
-//  results.max_b_factor = max_b_factor;
-//
-//  results.chain_labels = metric.get_chain_labels();
 
     AverageBFactorMetric* average_b_factor_metric = new AverageBFactorMetric;
     MaxBFactorMetric* max_b_factor_metric = new MaxBFactorMetric;
@@ -28,7 +21,7 @@ ResultsBinding calculate() {
             max_b_factor_metric,
     };
 
-    CalculatedMetrics calculated_metrics = CalculatedMetrics("/5fjj.pdb", metrics);
+    CalculatedMetrics calculated_metrics = CalculatedMetrics("/input.pdb", metrics);
     ResultsBinding results = calculated_metrics.calculate();
 
     delete average_b_factor_metric;

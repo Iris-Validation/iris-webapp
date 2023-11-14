@@ -1,0 +1,1753 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="iris"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;CMake Files\ccp4\;CMake Files\clipper\;CMake Files\clipper\ccp4\;CMake Files\clipper\cif\;CMake Files\clipper\cns\;CMake Files\clipper\contrib\;CMake Files\clipper\core\;CMake Files\clipper\minimol\;CMake Files\clipper\mmdb\;CMake Files\clipper\phs\;CMake Files\fftw\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\privateer_wasm\;CMake Files\..\..\privateer_wasm\emsdk\;CMake Files\..\..\privateer_wasm\emsdk\upstream\;CMake Files\..\..\privateer_wasm\emsdk\upstream\emscripten\;CMake Files\..\..\privateer_wasm\emsdk\upstream\emscripten\cmake\;CMake Files\..\..\privateer_wasm\emsdk\upstream\emscripten\cmake\Modules\;CMake Files\..\..\privateer_wasm\emsdk\upstream\emscripten\cmake\Modules\Platform\;CMake Files\rfftw\;CMake Files\mmdb2\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="iris_lib">
+				<Option output="/home/jordan/dev/iris-webapp/backend/libiris_lib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/checkout/clipper"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 iris_lib"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="iris_lib/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/libiris_lib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/checkout/clipper"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 iris_lib/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="iris_exec">
+				<Option output="/home/jordan/dev/iris-webapp/backend/iris.js" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/checkout/clipper"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 iris_exec"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="iris_exec/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/iris.js" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/checkout/clipper"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 iris_exec/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="fftw">
+				<Option output="/home/jordan/dev/iris-webapp/backend/fftw/libfftw.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/fftw"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/fftw/Makefile&quot;  VERBOSE=1 fftw"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/fftw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/fftw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/fftw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="fftw/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/fftw/libfftw.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/fftw"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/fftw/Makefile&quot;  VERBOSE=1 fftw/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/fftw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/fftw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/fftw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rfftw">
+				<Option output="/home/jordan/dev/iris-webapp/backend/rfftw/librfftw.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/rfftw"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/rfftw/../checkout/fftw-2.1.5/fftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/rfftw/Makefile&quot;  VERBOSE=1 rfftw"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/rfftw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/rfftw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/rfftw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rfftw/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/rfftw/librfftw.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/rfftw"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/rfftw/../checkout/fftw-2.1.5/fftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/rfftw/Makefile&quot;  VERBOSE=1 rfftw/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/rfftw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/rfftw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/rfftw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ccp4">
+				<Option output="/home/jordan/dev/iris-webapp/backend/ccp4/libccp4.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/ccp4"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/ccp4/Makefile&quot;  VERBOSE=1 ccp4"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/ccp4/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/ccp4/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/ccp4/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ccp4/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/ccp4/libccp4.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/ccp4"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/ccp4/Makefile&quot;  VERBOSE=1 ccp4/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/ccp4/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/ccp4/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/ccp4/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mmdb2">
+				<Option output="/home/jordan/dev/iris-webapp/backend/mmdb2/libmmdb2.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/mmdb2"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/mmdb2/Makefile&quot;  VERBOSE=1 mmdb2"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/mmdb2/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/mmdb2/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/mmdb2/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mmdb2/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/mmdb2/libmmdb2.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/mmdb2"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/mmdb2/Makefile&quot;  VERBOSE=1 mmdb2/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/mmdb2/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/mmdb2/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/mmdb2/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-minimol">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/minimol/libclipper-minimol.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/minimol"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/mmdb2"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/clipper/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/fftw-2.1.5/fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/fftw-2.1.5/rfftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/gemmi/include"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../dependencies/gemmi/include/gemmi"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/minimol/Makefile&quot;  VERBOSE=1 clipper-minimol"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/minimol/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/minimol/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/minimol/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-minimol/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/minimol/libclipper-minimol.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/minimol"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/mmdb2"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/clipper/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/fftw-2.1.5/fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/fftw-2.1.5/rfftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../checkout/gemmi/include"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/minimol/../../dependencies/gemmi/include/gemmi"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/minimol/Makefile&quot;  VERBOSE=1 clipper-minimol/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/minimol/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/minimol/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/minimol/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-core">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/core/libclipper-core.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/core"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/core/../../checkout/fftw-2.1.5/fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/core/../../checkout/fftw-2.1.5/rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/core/Makefile&quot;  VERBOSE=1 clipper-core"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/core/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/core/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/core/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-core/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/core/libclipper-core.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/core"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/core/../../checkout/fftw-2.1.5/fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/core/../../checkout/fftw-2.1.5/rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/core/Makefile&quot;  VERBOSE=1 clipper-core/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/core/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/core/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/core/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-ccp4">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/libclipper-ccp4.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/ccp4"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/../../checkout/libccp4"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/../../fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/../../rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/ccp4/Makefile&quot;  VERBOSE=1 clipper-ccp4"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/ccp4/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/ccp4/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/ccp4/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-ccp4/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/libclipper-ccp4.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/ccp4"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/../../checkout/libccp4"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/../../fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/../../rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/ccp4/Makefile&quot;  VERBOSE=1 clipper-ccp4/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/ccp4/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/ccp4/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/ccp4/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-contrib">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/contrib/libclipper-contrib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/contrib"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/contrib/../.."/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/contrib/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/contrib/../../fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/contrib/../../rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/contrib/Makefile&quot;  VERBOSE=1 clipper-contrib"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/contrib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/contrib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/contrib/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-contrib/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/contrib/libclipper-contrib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/contrib"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/contrib/../.."/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/contrib/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/contrib/../../fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/contrib/../../rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/contrib/Makefile&quot;  VERBOSE=1 clipper-contrib/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/contrib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/contrib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/contrib/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-cns">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/cns/libclipper-cns.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/cns"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cns/../.."/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cns/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cns/../../fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cns/../../rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cns/Makefile&quot;  VERBOSE=1 clipper-cns"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cns/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cns/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cns/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-cns/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/cns/libclipper-cns.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/cns"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cns/../.."/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cns/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cns/../../fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cns/../../rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cns/Makefile&quot;  VERBOSE=1 clipper-cns/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cns/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cns/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cns/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-mmdb">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/libclipper-mmdb.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/mmdb"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/../../checkout/mmdb2"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/../../fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/../../rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/mmdb/Makefile&quot;  VERBOSE=1 clipper-mmdb"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/mmdb/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/mmdb/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/mmdb/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-mmdb/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/libclipper-mmdb.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/mmdb"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/../../checkout/mmdb2"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/../../fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/../../rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/mmdb/Makefile&quot;  VERBOSE=1 clipper-mmdb/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/mmdb/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/mmdb/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/mmdb/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-cif">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/cif/libclipper-cif.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/cif"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cif/../../checkout/mmdb2"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cif/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cif/../../checkout/fftw-2.1.5/fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cif/../../rcheckout/fftw-2.1.5/fftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cif/Makefile&quot;  VERBOSE=1 clipper-cif"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cif/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cif/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cif/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-cif/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/cif/libclipper-cif.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/cif"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cif/../../checkout/mmdb2"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cif/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cif/../../checkout/fftw-2.1.5/fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/cif/../../rcheckout/fftw-2.1.5/fftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cif/Makefile&quot;  VERBOSE=1 clipper-cif/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cif/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cif/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/cif/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-phs">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/phs/libclipper-phs.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/phs"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/phs/../.."/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/phs/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/phs/../../fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/phs/../../rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/phs/Makefile&quot;  VERBOSE=1 clipper-phs"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/phs/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/phs/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/phs/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="clipper-phs/fast">
+				<Option output="/home/jordan/dev/iris-webapp/backend/clipper/phs/libclipper-phs.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/jordan/dev/iris-webapp/backend/clipper/phs"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/phs/../.."/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/phs/../../checkout/clipper"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/phs/../../fftw"/>
+					<Add directory="/home/jordan/dev/iris-webapp/backend/clipper/phs/../../rfftw"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/phs/Makefile&quot;  VERBOSE=1 clipper-phs/fast"/>
+					<CompileFile command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/phs/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/phs/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -f &quot;/home/jordan/dev/iris-webapp/backend/clipper/phs/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/ccp4/ccp4_map_io.cpp">
+			<Option target="clipper-ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/ccp4/ccp4_map_io.h">
+			<Option target="clipper-ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/ccp4/ccp4_mtz_io.cpp">
+			<Option target="clipper-ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/ccp4/ccp4_mtz_io.h">
+			<Option target="clipper-ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/ccp4/ccp4_mtz_types.cpp">
+			<Option target="clipper-ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/ccp4/ccp4_mtz_types.h">
+			<Option target="clipper-ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/ccp4/ccp4_utils.cpp">
+			<Option target="clipper-ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/ccp4/ccp4_utils.h">
+			<Option target="clipper-ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/cif/cif_data_io.cpp">
+			<Option target="clipper-cif"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/cif/cif_data_io.h">
+			<Option target="clipper-cif"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/cns/cns_hkl_io.cpp">
+			<Option target="clipper-cns"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/cns/cns_hkl_io.h">
+			<Option target="clipper-cns"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/cns/cns_map_io.cpp">
+			<Option target="clipper-cns"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/cns/cns_map_io.h">
+			<Option target="clipper-cns"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/convolution_search.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/convolution_search.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/edcalc.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/edcalc.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/fffear.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/fffear.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/function_object_bases.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/function_object_bases.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/mapfilter.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/mapfilter.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/originmatch.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/originmatch.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/sfcalc.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/sfcalc.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/sfcalc_obs.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/sfcalc_obs.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/sfscale.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/sfscale.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/sfweight.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/sfweight.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/skeleton.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/skeleton.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/test_contrib.cpp">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/contrib/test_contrib.h">
+			<Option target="clipper-contrib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/atomsf.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/atomsf.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/cell.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/cell.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_instance.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_instance.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_memory.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_memory.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_message.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_message.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_stats.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_stats.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_test.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_test.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_thread.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_thread.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_types.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_types.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_util.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/clipper_util.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/container.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/container.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/container_hkl.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/container_hkl.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/container_map.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/container_map.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/container_types.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/container_types.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/coords.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/coords.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/derivs.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/derivs.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/fftmap.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/fftmap.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/fftmap_sparse.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/fftmap_sparse.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_compute.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_compute.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_data.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_data.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_datatypes.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_datatypes.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_info.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_info.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_lookup.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_lookup.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_operators.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/hkl_operators.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/map_interp.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/map_interp.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/map_utils.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/map_utils.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/nxmap.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/nxmap.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/nxmap_operator.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/nxmap_operator.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/ramachandran.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/ramachandran.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/resol_basisfn.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/resol_basisfn.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/resol_fn.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/resol_fn.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/resol_targetfn.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/resol_targetfn.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/rotation.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/rotation.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/spacegroup.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/spacegroup.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/spacegroup_data.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/spacegroup_data.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/symop.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/symop.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/test_core.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/test_core.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/test_data.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/test_data.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/xmap.cpp">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/core/xmap.h">
+			<Option target="clipper-core"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/container_minimol.cpp">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/container_minimol.h">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/minimol.cpp">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/minimol.h">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/minimol_data.cpp">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/minimol_data.h">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/minimol_io.cpp">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/minimol_io.h">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/minimol_seq.cpp">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/minimol_seq.h">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/minimol_utils.cpp">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/minimol/minimol_utils.h">
+			<Option target="clipper-minimol"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/mmdb/clipper_mmdb.cpp">
+			<Option target="clipper-mmdb"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/mmdb/clipper_mmdb.h">
+			<Option target="clipper-mmdb"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/phs/phs_io.cpp">
+			<Option target="clipper-phs"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/clipper/clipper/phs/phs_io.h">
+			<Option target="clipper-phs"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/config.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/config.h">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/executor.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fftwf77.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fftwnd.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_1.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_10.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_11.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_12.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_13.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_14.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_15.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_16.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_2.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_3.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_32.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_4.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_5.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_6.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_64.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_7.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_8.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fn_9.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_1.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_10.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_11.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_12.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_13.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_14.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_15.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_16.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_2.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_3.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_32.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_4.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_5.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_6.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_64.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_7.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_8.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/fni_9.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_10.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_16.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_2.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_3.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_32.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_4.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_5.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_6.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_64.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_7.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_8.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftw_9.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_10.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_16.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_2.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_3.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_32.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_4.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_5.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_6.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_64.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_7.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_8.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/ftwi_9.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/generic.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/malloc.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/planner.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/putils.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/rader.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/timer.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/twiddle.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/wisdom.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/fftw/wisdomio.c">
+			<Option target="fftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_1.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_10.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_11.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_12.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_128.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_13.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_14.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_15.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_16.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_2.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_3.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_32.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_4.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_5.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_6.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_64.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_7.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_8.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fcr_9.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_10.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_16.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_2.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_3.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_32.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_4.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_5.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_6.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_7.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_8.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhb_9.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_10.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_16.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_2.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_3.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_32.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_4.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_5.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_6.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_7.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_8.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/fhf_9.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_1.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_10.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_11.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_12.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_128.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_13.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_14.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_15.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_16.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_2.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_3.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_32.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_4.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_5.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_6.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_64.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_7.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_8.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/frc_9.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/rconfig.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/rexec.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/rexec2.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/rfftwf77.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/rfftwnd.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/rgeneric.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/fftw-2.1.5/rfftw/rplanner.c">
+			<Option target="rfftw"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/ccp4_array.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/ccp4_array.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/ccp4_general.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/ccp4_general.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/ccp4_parser.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/ccp4_parser.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/ccp4_program.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/ccp4_program.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/ccp4_unitcell.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/ccp4_unitcell.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_accessor.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_close.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_data.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_data.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_header.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_header.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_labels.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_labels.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_open.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_skew.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_skew.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_stats.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_stats.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmap_symop.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmtzlib.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cmtzlib.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/csymlib.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/csymlib.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cvecmat.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/cvecmat.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/library_err.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/library_file.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/library_file.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/library_utils.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/pack_c.c">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/libccp4/ccp4/pack_c.h">
+			<Option target="ccp4"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/hybrid_36.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/hybrid_36.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_atom.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_atom.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_bondmngr.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_bondmngr.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_chain.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_chain.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_cifdefs.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_cifdefs.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_coormngr.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_coormngr.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_cryst.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_cryst.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_ficif.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_ficif.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_io_file.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_io_file.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_io_stream.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_io_stream.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_machine_.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_machine_.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_manager.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_manager.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_mask.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_mask.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_align.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_align.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_bfgsmin.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_bfgsmin.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_fft.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_fft.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_graph.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_graph.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_linalg.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_linalg.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_rand.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_math_rand.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_mattype.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_mattype.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_mmcif_.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_mmcif_.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_model.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_model.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_root.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_root.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_rwbrook.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_rwbrook.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_selmngr.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_selmngr.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_seqsuperpose.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_seqsuperpose.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_symop.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_symop.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_tables.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_tables.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_title.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_title.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_uddata.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_uddata.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_utils.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_utils.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_xml_.cpp">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/checkout/mmdb2/mmdb2/mmdb_xml_.h">
+			<Option target="mmdb2"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/src/iris-backend.cpp">
+			<Option target="iris_lib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/src/iris-backend.h">
+			<Option target="iris_lib"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/src/iris-bind.cpp">
+			<Option target="iris_lib"/>
+			<Option target="iris_exec"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/ccp4/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\ccp4\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/clipper/ccp4/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\clipper\ccp4\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/clipper/cif/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\clipper\cif\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/clipper/cns/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\clipper\cns\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/clipper/contrib/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\clipper\contrib\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/clipper/core/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\clipper\core\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/clipper/minimol/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\clipper\minimol\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/clipper/mmdb/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\clipper\mmdb\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/clipper/phs/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\clipper\phs\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/fftw/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\fftw\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/../../privateer_wasm/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake">
+			<Option virtualFolder="CMake Files\..\..\privateer_wasm\emsdk\upstream\emscripten\cmake\Modules\Platform\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/rfftw/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\rfftw\"/>
+		</Unit>
+		<Unit filename="/home/jordan/dev/iris-webapp/backend/mmdb2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\mmdb2\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
