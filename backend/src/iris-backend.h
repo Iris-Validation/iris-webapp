@@ -2,42 +2,63 @@
 #include <clipper/clipper-contrib.h>
 #include <clipper/clipper-minimol.h>
 
-struct ResidueResults { 
+struct ResidueResult {
     std::string name; 
     float value; 
     int seqnum;
+    std::string metric;
 };
 
-struct ChainResults { 
+struct ChainResult {
     std::string chain; 
-    std::vector<ResidueResults> results;
+    std::vector<ResidueResult> results;
 };
 
-struct Results { 
-    std::vector<ChainResults> result; 
-};
- 
-struct MultiResults { 
-    Results average_b_factor;
-    Results max_b_factor; 
+
+struct ResultsBinding {
+    std::vector<ChainResult> result;
     std::vector<std::string> chain_labels; 
 };
- 
 
-class Metric { 
-public: 
-    Metric(const std::string& path);
+struct AbstractMetric {
+    virtual ResidueResult score(clipper::MMonomer &monomer) const = 0;
+    int scale = 50;
+};
 
-    Results calculate_average_b_factors(int scale);
-    Results calculate_max_b_factors(int scale);
+struct AverageBFactorMetric: public AbstractMetric {
+    ResidueResult score(clipper::MMonomer &monomer) const override ;
+};
 
-    std::vector<std::string> get_chain_labels(); 
+struct MaxBFactorMetric: public AbstractMetric {
+    ResidueResult score(clipper::MMonomer &monomer) const override;
+};
+
+class CalculatedMetrics {
+public:
+    CalculatedMetrics(const std::string& path, std::vector<AbstractMetric*>& metrics);
+
+    ResultsBinding calculate();
 
 private:
+    std::vector<AbstractMetric*> m_metrics;
+    clipper::MiniMol m_mol;
 
-    float calculate_average_b_factor(clipper::MMonomer& monomer, int scale = 1);
-    float calculate_max_b_factor(clipper::MMonomer& monomer, int scale = 1);
-
-    clipper::MiniMol m_mol; 
 };
+//
+//class Metric {
+//public:
+//    Metric(const std::string& path);
+//
+//    Results calculate_average_b_factors(int scale);
+//    Results calculate_max_b_factors(int scale);
+//
+//    std::vector<std::string> get_chain_labels();
+//
+//private:
+//
+//    float calculate_average_b_factor(clipper::MMonomer& monomer, int scale = 1);
+//    float calculate_max_b_factor(clipper::MMonomer& monomer, int scale = 1);
+//
+//    clipper::MiniMol m_mol;
+//};
 

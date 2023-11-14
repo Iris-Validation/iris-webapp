@@ -29,6 +29,51 @@ function parse_result(results: any) {
   return data;
 }
 
+function extract_metric_values(results: any) {
+  let first_value = results[Object.keys(results)[0]]
+  let metrics = {}
+
+  // Init metric obj for however many metrics there are
+  for (let i = 0; i < first_value.length; i++) {
+    let current_data = first_value[i];
+    metrics[current_data.metric] = []
+  }
+
+  for (const data in results) {
+    for (let j = 0; j < results[data].length; j++) {
+      metrics[results[data][j].metric].push(results[data][j].value)
+    }
+  }
+
+  return metrics;
+}
+
+function parse_results(results: any) {
+  let result = results.result;
+
+  let data = {}
+  for (let i = 0; i < result.size(); i++) {
+    let chain_info = result.get(i);
+    let chain_name = chain_info.chain;
+    let results = chain_info.results;
+
+    let chain_data = {}
+    for (let j = 0; j < results.size(); j++) {
+      let residue_result = results.get(j);
+      if (residue_result.seqnum in chain_data) {
+        chain_data[residue_result.seqnum].push(residue_result);
+      }
+      else {
+        chain_data[residue_result.seqnum] = [residue_result];
+      }
+    }
+
+    data[chain_name] = chain_data;
+  }
+
+  return data;
+}
+
 function get_values(dataset: any, chain: string) {
   let values = []
   for (let i = 0; i < dataset[chain].length; i++) {
@@ -37,14 +82,21 @@ function get_values(dataset: any, chain: string) {
   return values
 }
 
+// function get_residue_data(results: any) {
+//   let residue_names = []
+//   for (let i = 0; i < results.length; i++) {
+//     residue_names.push(`${results[i].res_name}/${results[i].seqnum}`)
+//   }
+//   return residue_names
+// }
+
 function get_residue_data(results: any) {
   let residue_names = []
-  for (let i = 0; i < results.length; i++) {
-    residue_names.push(`${results[i].res_name}/${results[i].seqnum}`)
+  for (const data in results) {
+    residue_names.push(`${results[data][0].name}/${results[data][0].seqnum}`)
   }
   return residue_names
 }
-
 
 function App() {
   let center = [500, 500]
@@ -53,18 +105,31 @@ function App() {
   const [maxBFactorData, setMaxBFactorData] = useState<Array<any>>();
   const [residueData, setResidueData] = useState<Array<any>>();
   const [selectedResidue, setSelectedResidue] = useState();
+  const [combinedData, setCombinedData] = useState<any>();
 
   const [chainListSet, setChainListSet] = useState(false);
   const [chainList, setChainList] = useState<Array<string>>();
   const [selectedChain, setSelectedChain] = useState();
+  const [dataLength, setDataLength] = useState();
+
+  const [rings, setRings] = useState();
+
 
   const [avgBFacPoints, setAvgBFacPoints] = useState();
   const [maxBFacPoints, setMaxBFacPoints] = useState();
   const [centerLinePoints, setCenterLinePoints] = useState()
 
-  const [ringOneTextPos, setRingOneTextPos] = useState(null)
-  const [ringTwoTextPos, setRingTwoTextPos] = useState(null)
+  const [ringTextData, setRingTextData] = useState([])
 
+
+  const colours = [
+    {fill: "#ff758f", stroke: "#ff4d6d"},
+    {fill: "#1a759f", stroke: "#1e6091"},
+    {fill: "#ff758f", stroke: "#ff4d6d"},
+    {fill: "#1a759f", stroke: "#1e6091"},
+    {fill: "#1a759f", stroke: "#1e6091"},
+
+  ]
 
   function get_current_residue(angle: number) {
 
@@ -73,8 +138,8 @@ function App() {
       let delta_angle = angle - 20
 
       let index = Math.floor(delta_angle * gap)
-      
-      if (angle == 340) { 
+
+      if (angle == 340) {
         index = residueData.length-1
       }
 
@@ -87,24 +152,26 @@ function App() {
     iris_module().then((Module: any) => {
       let results = Module.test();
 
-      let avg_b_factor_data = parse_result(results.average_b_factor);
-      let max_b_factor_data = parse_result(results.max_b_factor);
-
-      setAverageBFactorData(avg_b_factor_data)
-      setMaxBFactorData(max_b_factor_data)
-
+      let data = parse_results(results)
+      setCombinedData(data)
+      // let avg_b_factor_data = parse_result(results.average_b_factor);
+      // let max_b_factor_data = parse_result(results.max_b_factor);
+      //
+      // setAverageBFactorData(avg_b_factor_data)
+      // setMaxBFactorData(max_b_factor_data)
+      //
       var chain_list = []
       for (let i = 0; i < results.chain_labels.size(); i++) {
         chain_list.push(results.chain_labels.get(i))
       }
-
+      //
       setChainListSet(true)
       setChainList(chain_list)
       setSelectedChain(chain_list[0])
-
-
-      let center_line = calculate_center_line(center, 20, 450)
-      setCenterLinePoints(center_line)
+      //
+      //
+      // let center_line = calculate_center_line(center, 20, 450)
+      // setCenterLinePoints(center_line)
 
     })
 
@@ -112,37 +179,70 @@ function App() {
 
 
   useEffect(() => {
-    if (averageBFactorData) {
-      
-      let radius = 400
-      let values = get_values(averageBFactorData, selectedChain)
-      let normalised = normalise_data(values)
-      const pl = calculate_poly_line(center, radius, normalised)
-      const ring = calculate_poly_line_for_circle(center, radius)
-      const points = pl + ring
 
-      setAvgBFacPoints(points)
+    if (!combinedData) return
 
-      let residue_data = get_residue_data(averageBFactorData[selectedChain])
+    let current_chain_data = combinedData[selectedChain]
+    if (!current_chain_data) return
+
+    let metrics = extract_metric_values(current_chain_data)
+
+    let max_radius = 400;
+    let current_radius = max_radius;
+
+    let current_rings = []
+    let current_ring_text = []
+    let dataLength = 0;
+    for (const metric in metrics) {
+      let normalised = normalise_data(metrics[metric])
+      const polyline = calculate_poly_line(center, current_radius, normalised)
+      const center_ring = calculate_poly_line_for_circle(center, current_radius)
+      const points = polyline + center_ring;
+
+      let residue_data = get_residue_data(current_chain_data)
       setResidueData(residue_data)
+      let ring_text_pos = calculate_text_position(center, metric, current_radius)
+      current_ring_text.push([...ring_text_pos, metric])
+      current_rings.push(points)
+      current_radius -= 50
+      dataLength = normalised.length
 
-      let text_pos = calculate_text_position(center, "Average B Factor", radius)
-      setRingOneTextPos(text_pos)
     }
+    setDataLength(dataLength)
+    setRings(current_rings)
+    setRingTextData(current_ring_text)
 
-    if (maxBFactorData) {
-      let radius = 350
-      let values = get_values(maxBFactorData, selectedChain)
-      let normalised = normalise_data(values)
-      const pl = calculate_poly_line(center, radius, normalised)
-      const ring = calculate_poly_line_for_circle(center, radius)
-      const points = pl + ring
-
-      setMaxBFacPoints(points)
-
-      let text_pos = calculate_text_position(center, "Max B Factor", radius)
-      setRingTwoTextPos(text_pos)
-    }
+    // if (averageBFactorData) {
+    //
+    //   let radius = 400
+    //   let values = get_values(averageBFactorData, selectedChain)
+    //   let normalised = normalise_data(values)
+    //   const pl = calculate_poly_line(center, radius, normalised)
+    //   const ring = calculate_poly_line_for_circle(center, radius)
+    //   const points = pl + ring
+    //
+    //   setAvgBFacPoints(points)
+    //
+    //   let residue_data = get_residue_data(averageBFactorData[selectedChain])
+    //   setResidueData(residue_data)
+    //
+    //   let text_pos = calculate_text_position(center, "Average B Factor", radius)
+    //   setRingOneTextPos(text_pos)
+    // }
+    //
+    // if (maxBFactorData) {
+    //   let radius = 350
+    //   let values = get_values(maxBFactorData, selectedChain)
+    //   let normalised = normalise_data(values)
+    //   const pl = calculate_poly_line(center, radius, normalised)
+    //   const ring = calculate_poly_line_for_circle(center, radius)
+    //   const points = pl + ring
+    //
+    //   setMaxBFacPoints(points)
+    //
+    //   let text_pos = calculate_text_position(center, "Max B Factor", radius)
+    //   setRingTwoTextPos(text_pos)
+    // }
 
   }, [selectedChain])
 
@@ -170,8 +270,8 @@ function App() {
       angle += 360
     }
 
-    if (residueData) { 
-      let gap = 320 / residueData.length 
+    if (residueData) {
+      let gap = 320 / residueData.length
       // console.log(residueData.length, gap)
       // angle = Math.ceil(angle/gap)*gap
     }
@@ -187,14 +287,14 @@ function App() {
     chainList: chainList,
     chainListSet: chainListSet,
     selectedChain: selectedChain,
-    setSelectedChain: setSelectedChain, 
+    setSelectedChain: setSelectedChain,
   }
 
-  const ringKurnlingProps = { 
+  const ringKurnlingProps = {
     center: [500,500],
     header: 40 ,
     radius: 450,
-    number: residueData ? residueData.length : 0,
+    number: dataLength,
   }
 
   return (
@@ -208,21 +308,25 @@ function App() {
       </div>
 
       <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" xmlnssvgjs="http://svgjs.dev/svgjs" width="1000" height="1000" viewBox="0 0 1000 1000" onMouseMove={(e) => { handle_mouse_move(e) }}>
-        
-        {ringOneTextPos !== null ? 
-              <text x={ringOneTextPos[0]} y={ringOneTextPos[1]} fill='gray'>{ringOneTextPos[2]}</text>: <></>
-        }
-
-        {ringTwoTextPos !== null ? 
-              <text x={ringTwoTextPos[0]} y={ringTwoTextPos[1]} fill='gray'>{ringTwoTextPos[2]}</text>: <></>
-        }
 
         <RingKnurling {...ringKurnlingProps}/>
 
-        <polyline points={avgBFacPoints} fill="#ff758f" strokeWidth="1" stroke="#ff4d6d" fillOpacity={0.2} fillRule="evenodd" />
-        <polyline points={maxBFacPoints} fill="#1a759f" strokeWidth="1" stroke="#1e6091" fillOpacity={0.2} fillRule="evenodd" />
+        {ringTextData ?
+          ringTextData.map((item, index) => {
+            return <text x={item[0]} y={item[1]} fill='gray' key={index}>{item[2]}</text>
+          }):
+            <></>
+        }
+
+        {rings ?
+          rings.map((item, index) => {
+            return <polyline points={item} fill={colours[index].fill} strokeWidth="1" stroke={colours[index].stroke} fillOpacity={0.2} fillRule="evenodd" key={index}/>
+          })
+            : <>No rings</>
+        }
+
         <polyline points={centerLinePoints} fill="gray" strokeWidth="1" stroke="gray" />
-        
+
       </svg>
     </div>
   )
