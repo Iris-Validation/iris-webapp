@@ -4,11 +4,11 @@ import { calculate_poly_line, calculate_poly_line_for_circle, calculate_center_l
 import { normalise_data } from "../../functions/data_manipulation.js"
 import RingKnurling from '../RingKnurling/RingKnurling'
 import { useEffect, useState } from 'react'
-
+import { IrisProps } from '../../interface/interface'
 
 function extract_metric_values(results: any) {
     let first_value = results[Object.keys(results)[0]]
-    let metrics = {}
+    let metrics: Record<string, Array<number>> = {}
 
     // Init metric obj for however many metrics there are
     for (let i = 0; i < first_value.length; i++) {
@@ -28,13 +28,13 @@ function extract_metric_values(results: any) {
 function parse_results(results: any) {
     let result = results.result;
 
-    let data = {}
+    let data: Record<string, Record<string, Array<number>>> = {}
     for (let i = 0; i < result.size(); i++) {
         let chain_info = result.get(i);
         let chain_name = chain_info.chain;
         let results = chain_info.results;
 
-        let chain_data = {}
+        let chain_data: Record<string, Array<number>> = {}
         for (let j = 0; j < results.size(); j++) {
             let residue_result = results.get(j);
             if (residue_result.seqnum in chain_data) {
@@ -60,7 +60,7 @@ function get_residue_data(results: any) {
     return residue_names
 }
 
-export default function Iris({ results }) {
+export default function Iris(props: IrisProps) {
 
     let center = [500, 500]
 
@@ -69,15 +69,15 @@ export default function Iris({ results }) {
     const [combinedData, setCombinedData] = useState<any>();
 
     const [chainListSet, setChainListSet] = useState(false);
-    const [chainList, setChainList] = useState<Array<string>>();
-    const [selectedChain, setSelectedChain] = useState();
-    const [dataLength, setDataLength] = useState();
+    const [chainList, setChainList] = useState<Array<string>>([""]);
+    const [selectedChain, setSelectedChain] = useState<string>("");
+    const [dataLength, setDataLength] = useState<number>();
 
-    const [rings, setRings] = useState();
+    const [rings, setRings] = useState<Array<any>>();
 
-    const [centerLinePoints, setCenterLinePoints] = useState()
+    const [centerLinePoints, setCenterLinePoints] = useState<string>()
 
-    const [ringTextData, setRingTextData] = useState([])
+    const [ringTextData, setRingTextData] = useState<Array<Array<any>>>()
 
 
     const colours = [
@@ -107,12 +107,14 @@ export default function Iris({ results }) {
 
     useEffect(() => {
 
-        let data = parse_results(results)
+        let data = parse_results(props.results)
         setCombinedData(data)
 
         var chain_list = []
-        for (let i = 0; i < results.chain_labels.size(); i++) {
-            chain_list.push(results.chain_labels.get(i))
+        // @ts-ignore
+        for (let i = 0; i < props.results.chain_labels.size(); i++) {
+            // @ts-ignore
+            chain_list.push(props.results.chain_labels.get(i))
         }
         //
         setChainListSet(true)
@@ -126,6 +128,7 @@ export default function Iris({ results }) {
     useEffect(() => {
 
         if (!combinedData) return
+        if (!selectedChain) return 
 
         let current_chain_data = combinedData[selectedChain]
         if (!current_chain_data) return
@@ -159,8 +162,9 @@ export default function Iris({ results }) {
 
     }, [selectedChain])
 
-    function handle_mouse_move(e) {
+    function handle_mouse_move(e: any) {
         var svg = document.getElementById("svg");
+        if (!svg) return
         var bounds = svg.getBoundingClientRect();
         var x = e.clientX - bounds.x;
         var y = e.clientY - bounds.y;
@@ -183,14 +187,14 @@ export default function Iris({ results }) {
             angle += 360
         }
 
-        if (residueData) {
-            let gap = 320 / residueData.length
-            // console.log(residueData.length, gap)
-            // angle = Math.ceil(angle/gap)*gap
-        }
+        // if (residueData) {
+        //     let gap = 320 / residueData.length
+        //     // console.log(residueData.length, gap)
+        //     // angle = Math.ceil(angle/gap)*gap
+        // }
 
 
-        let highlighted_residue = get_current_residue(angle)
+        get_current_residue(angle)
 
         let center_line = calculate_center_line(center, angle, 450)
         setCenterLinePoints(center_line)
@@ -207,7 +211,7 @@ export default function Iris({ results }) {
         center: [500, 500],
         header: 40,
         radius: 450,
-        number: dataLength,
+        number: dataLength ? dataLength: 0,
     }
 
     return (
@@ -220,7 +224,7 @@ export default function Iris({ results }) {
                 <span className='text-xl text-white ml-16 my-2 w-64'>Residue: {selectedResidue}</span>
             </div>
 
-            <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" xmlnssvgjs="http://svgjs.dev/svgjs" width="1000" height="1000" viewBox="0 0 1000 1000" onMouseMove={(e) => { handle_mouse_move(e) }}>
+            <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" width="1000" height="1000" viewBox="0 0 1000 1000" onMouseMove={(e) => { handle_mouse_move(e) }}>
 
                 <RingKnurling {...ringKurnlingProps} />
 

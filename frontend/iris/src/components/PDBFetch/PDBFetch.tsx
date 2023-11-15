@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { PDBFetch } from "../../interface/interface";
 
-export default function PDBFetch({PDBCode, setPDBCode, submitPressed}) {
+export default function PDBFetch(props: PDBFetch) {
 
     const [pdb, setPDB] = useState("")
 
@@ -8,13 +9,13 @@ export default function PDBFetch({PDBCode, setPDBCode, submitPressed}) {
         if (pdb.length != 4) { return }
         if (!pdb.match(/^[a-z0-9]+$/i)) { return }
 
-        setPDBCode(pdb)
-        submitPressed(true)
+        props.setPDBCode(pdb)
+        props.submitPressed(true)
     }, [pdb])
 
     return (
         <>
-        {PDBCode != true ? 
+        {props.PDBCode == "" ? 
             <div className="flex items-center justify-center m-12 w-64 ">
             <label className="flex flex-col items-center justify-center w-full p-12 h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer border-gray-600">
                 <div className="flex flex-col items-center justify-center pt-5 pb-6 text-center" >
@@ -31,8 +32,9 @@ export default function PDBFetch({PDBCode, setPDBCode, submitPressed}) {
                     <button type="button" id="fetch" className="bg-gray-50 border font-bold  border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     onClick={
                         () => {
-                            let element = document.getElementById("code")
-                            setPDB(element.value)
+                            let element = document.getElementById("code") as HTMLInputElement
+                            if (element)
+                                setPDB(element.value)
                         }
                     }
                     >Fetch</button>
@@ -40,7 +42,7 @@ export default function PDBFetch({PDBCode, setPDBCode, submitPressed}) {
                 </div>
             </label>
         </div> :
-         <></>
+         <>Cannot be shown</>
         }
         </>
     )

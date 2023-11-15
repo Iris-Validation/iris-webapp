@@ -1,11 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
-
-interface ChainSelectionButtonsTypes { 
-    chainList: Array<string>
-    chainListSet: boolean
-    selectedChain: string
-    setSelectedChain: Dispatch<SetStateAction<string>>
-}
+import { ChainSelectionButtonsTypes } from "../../interface/interface"
 
 export default function ChainSelectionButtons(props: ChainSelectionButtonsTypes) { 
     return (

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import UploadButton from "./UploadButton"
 import Submit from "../Submit/Submit";
 import PDBFetch from "../PDBFetch/PDBFetch";
-import {HeaderProps, UploadButtonProps} from "../../interfaces/types"
+import {HeaderProps, UploadButtonProps} from "../../interface/interface"
 
 export default function Upload(props: HeaderProps) {
     const [showUploadAgain, setShowUploadAgain] = useState(true)
@@ -67,8 +67,7 @@ export default function Upload(props: HeaderProps) {
               <></>} 
             {showPDBFetch === true ? 
              <PDBFetch PDBCode={props.PDBCode} setPDBCode={props.setPDBCode} submitPressed={props.setSubmit}/> 
-             :
-              <></>} 
+            : <></>}  
             
         </div>
     )

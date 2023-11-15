@@ -1,12 +1,13 @@
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsxDEV as _jsxDEV, Fragment as _Fragment } from "react/jsx-dev-runtime";
+const _jsxFileName = "/Users/dialpuri/Development/iris-webapp/frontend/iris/src/pages/Home.tsx";
 import { lazy, useEffect, useState } from "react";
 import { Header } from '../layouts/Header';
-import { Information } from '../components/Information/Information.tsx';
+import { Information } from '../components/Information/Information';
 // @ts-ignore
 import iris_module from "../../api/iris.js";
-const Footer = lazy(() => import('../layouts/Footer.tsx'));
-const BorderElement = lazy(() => import('../layouts/BorderElement.tsx'));
-import { fetch_map, fetch_pdb } from "../utils/fetch_from_pdb.ts";
+const Footer = lazy(() => import('../layouts/Footer'));
+const BorderElement = lazy(() => import('../layouts/BorderElement'));
+import { fetch_map, fetch_pdb } from "../utils/fetch_from_pdb";
 export default function HomeSection() {
     const [coordinateFile, setCoordinateFile] = useState(null);
     const [reflectionFile, setReflectionFile] = useState(null);
@@ -14,7 +15,6 @@ export default function HomeSection() {
     const [fileContent, setFileContent] = useState("");
     const [mtzData, setMtzData] = useState(null);
     const [submit, setSubmit] = useState(false);
-    const [ringData, setRingData] = useState(null);
     const [loadingText, setLoadingText] = useState("Validating Glycans...");
     const [resetApp, setResetApp] = useState(false);
     const [fallback, setFallBack] = useState(false);
@@ -24,7 +24,9 @@ export default function HomeSection() {
         Module['FS_createDataFile']('/', "input.mtz", mtzData, true, true, true);
         Module['FS_createDataFile']('/', "input.pdb", response, true, true, true);
         let x = Module.test();
+        console.log(x);
         setResults(x);
+        setFailureText("");
     }
     useEffect(() => {
         if (PDBCode != "") {
@@ -33,11 +35,10 @@ export default function HomeSection() {
             fetch_map(PDBCode).then((response) => {
                 let array = new Uint8Array(response);
                 setMtzData(array);
-            }).catch((e) => {
+            }).catch(() => {
                 setLoadingText("MTZ not found, continuing...");
             });
             fetch_pdb(PDBCode).then((response) => {
-                console.log(response);
                 let array = new Uint8Array(response);
                 setFileContent(array);
                 setLoadingText("Generating Iris Report...");
@@ -59,7 +60,9 @@ export default function HomeSection() {
                     coordinateReader.readAsText(coordinateFile);
                 }
                 reflectionReader.onload = async () => {
-                    let map_data = new Uint8Array(reflectionReader.result);
+                    let reader = reflectionReader.result;
+                    // @ts-ignore
+                    let map_data = new Uint8Array(reader);
                     setMtzData(map_data);
                     Module['FS_createDataFile']('/', "input.mtz", map_data, true, true, true);
                 };
@@ -67,29 +70,12 @@ export default function HomeSection() {
                     reflectionReader.readAsArrayBuffer(reflectionFile);
                 }
             });
-            // privateer_module().then((Module: { [x: string]: (arg0: string, arg1: string, arg2: Uint8Array, arg3: boolean, arg4: boolean, arg5: boolean) => void; }) => {
-            //     var coordinateReader = new FileReader();
-            //     var reflectionReader = new FileReader();
-            //     coordinateReader.onload = () => { run_iris(Module, coordinateReader.result, coordinateFile!.name) }
-            //     if (coordinateFile) {
-            //         coordinateReader.readAsText(coordinateFile);
-            //     }
-            //     reflectionReader.onload = async () => {
-            //         let map_data = new Uint8Array(reflectionReader.result);
-            //         setMtzData(map_data)
-            //         Module['FS_createDataFile']('/', "input.mtz", map_data, true, true, true)
-            //     }
-            //     if (reflectionFile) {
-            //         reflectionReader.readAsArrayBuffer(reflectionFile)
-            //     }
-            // }).catch((e: any) => console.log(e));
         }
     }, [submit]);
     useEffect(() => {
         setReflectionFile(null);
         setCoordinateFile(null);
         setSubmit(false);
-        setRingData(null);
         setFallBack(false);
         setResetApp(false);
         setPDBCode("");
@@ -106,7 +92,6 @@ export default function HomeSection() {
         setReflectionFile: setReflectionFile,
         submit: submit,
         setSubmit: setSubmit,
-        tableData: ringData,
         loadingText: loadingText,
         fileContent: fileContent,
         fallback: fallback,
@@ -114,5 +99,5 @@ export default function HomeSection() {
         failureText: failureText,
         results: results
     };
-    return (_jsxs(_Fragment, { children: [_jsx(Header, { ...main_props }), _jsx(BorderElement, { topColor: "#e0e1dd", bottomColor: "#F4F9FF", reverse: false }), _jsx(Information, {}), _jsx(BorderElement, { topColor: "#F4F9FF", bottomColor: "#e0e1dd", reverse: true }), _jsx(Footer, {})] }));
+    return (_jsxDEV(_Fragment, { children: [_jsxDEV(Header, { ...main_props }, void 0, false, { fileName: _jsxFileName, lineNumber: 130, columnNumber: 13 }, this), _jsxDEV(BorderElement, { topColor: "#e0e1dd", bottomColor: "#F4F9FF", reverse: false }, void 0, false, { fileName: _jsxFileName, lineNumber: 131, columnNumber: 13 }, this), _jsxDEV(Information, {}, void 0, false, { fileName: _jsxFileName, lineNumber: 132, columnNumber: 13 }, this), _jsxDEV(BorderElement, { topColor: "#F4F9FF", bottomColor: "#e0e1dd", reverse: true }, void 0, false, { fileName: _jsxFileName, lineNumber: 133, columnNumber: 13 }, this), _jsxDEV(Footer, {}, void 0, false, { fileName: _jsxFileName, lineNumber: 134, columnNumber: 13 }, this)] }, void 0, true, { fileName: _jsxFileName, lineNumber: 128, columnNumber: 13 }, this));
 }

@@ -1,4 +1,4 @@
-
+import {RingKnurlingType} from "../../interface/interface"
 
 export default function RingKnurling(props: RingKnurlingType) {
 
@@ -7,8 +7,8 @@ export default function RingKnurling(props: RingKnurlingType) {
 
     let points: any[] = []
     let line_length = 10
-    let outer_ring: any[] = []
-    let inner_ring: any[] = []
+    // let outer_ring: any[] = []
+    // let inner_ring: any[] = []
 
     for (let i = 0; i < props.number; i++) {
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UploadButtonProps } from "../../interfaces/types";
+import { UploadButtonProps } from "../../interface/interface";
 export default function UploadButton(props: UploadButtonProps) {
 
     const fileUpload = (e: any) => {

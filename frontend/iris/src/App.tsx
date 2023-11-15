@@ -253,7 +253,7 @@
 
 // export default App
 
-import { useEffect, useState, Suspense } from 'react'
+import { Suspense } from 'react'
 import './App.css'
 import HomeSection from './pages/Home'
 import PageLoad from './components/Loading/PageLoad'

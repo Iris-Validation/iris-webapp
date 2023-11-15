@@ -1,25 +1,26 @@
 import Molecule from "../../assets/Molecule"
+import { SubmitProps, FileLineProps } from "../../interface/interface"
 
-function FileLine({icon, name}) { 
+function FileLine(props: FileLineProps) { 
     return (
         <div className="flex flex-row w-64 justify-center px-12 py-2 rounded-lg min-w-0">
             <div className="pr-2">
-                {icon}
+                {props.icon}
             </div>
-            <p className="text-ellipsis overflow-hidden">{name}</p>  
+            <p className="text-ellipsis overflow-hidden">{props.name}</p>  
         </div>
     )
 }
 
-export default function Submit({coordinateFile, reflectionFile, submitPressed, setResetApp, allowSubmit}) {
+export default function Submit(props: SubmitProps) {
 
     const getFileList = () => { 
         const array = []
-        if (coordinateFile) {
-            array.push(<FileLine icon={<Molecule/>} name={coordinateFile.name} key={"c"}/>)
+        if (props.coordinateFile) {
+            array.push(<FileLine icon={<Molecule/>} name={props.coordinateFile.name} key={"c"}/>)
         }
-        if (reflectionFile) {
-            array.push(<FileLine icon={<Molecule/>} name={reflectionFile.name} key={"r"}/>)
+        if (props.reflectionFile) {
+            array.push(<FileLine icon={<Molecule/>} name={props.reflectionFile.name} key={"r"}/>)
         }
         return array
     }
@@ -38,15 +39,15 @@ export default function Submit({coordinateFile, reflectionFile, submitPressed, s
             <div className="flex space-x-4 py-6">
             <button
                     className="bg-gray hover:bg-hover border-gray-800 border-2 text-primary opacity-60 font-bold py-2 px-4 rounded"
-                    onClick={() => setResetApp(true)}>Cancel
+                    onClick={() => props.setResetApp(true)}>Cancel
             </button>
 
-            {allowSubmit ? <button
+            {props.allowSubmit ? <button
                     className="bg-gray hover:bg-hover border-gray-300 border-2 text-primary font-bold py-2 px-4 rounded"
-                    onClick={submitPressed}>Submit
+                    onClick={() => {props.submitPressed(true)}}>Submit
             </button> : <button
                     className="bg-gray border-gray-800 border-2 text-primary opacity-40 font-bold py-2 px-4 rounded"
-                    onClick={submitPressed} disabled>Submit
+                    onClick={() => {props.submitPressed(true)}} disabled>Submit
             </button>
             }
             

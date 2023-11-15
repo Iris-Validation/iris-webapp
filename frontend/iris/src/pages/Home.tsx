@@ -1,15 +1,15 @@
 import { lazy, useEffect, useState } from "react";
 
 import { Header } from '../layouts/Header';
-import { Information } from '../components/Information/Information.tsx';
+import { Information } from '../components/Information/Information';
 // @ts-ignore
 import iris_module from "../../api/iris.js"
 
-const Footer = lazy(() => import('../layouts/Footer.tsx'));
-const BorderElement = lazy(() => import('../layouts/BorderElement.tsx'));
+const Footer = lazy(() => import('../layouts/Footer'));
+const BorderElement = lazy(() => import('../layouts/BorderElement'));
  
-import {TableDataEntry, HeaderProps} from "../../interfaces/types"
-import { fetch_map, fetch_pdb } from "../utils/fetch_from_pdb.ts";
+import {HeaderProps} from "../interface/interface"
+import { fetch_map, fetch_pdb } from "../utils/fetch_from_pdb";
 
 export default function HomeSection() {
     const [coordinateFile, setCoordinateFile] = useState<File | null>(null);
@@ -18,7 +18,6 @@ export default function HomeSection() {
     const [fileContent, setFileContent] = useState<string | ArrayBuffer>("")
     const [mtzData, setMtzData] = useState<Uint8Array | null>(null)
     const [submit, setSubmit] = useState<boolean>(false);
-    const [ringData, setRingData] = useState<Array<TableDataEntry> | null>(null);
     const [loadingText, setLoadingText] = useState<string>("Validating Glycans...");
     const [resetApp, setResetApp] = useState<boolean>(false)
     const [fallback, setFallBack] = useState<boolean>(false)
@@ -31,26 +30,25 @@ export default function HomeSection() {
 
         let x = Module.test()
 
+        console.log(x)
         setResults(x);
-
-    }
-
+        setFailureText("")
+    }   
 
     useEffect(() => {
         if (PDBCode != "") {
             console.log(PDBCode)
             setLoadingText(`Fetching ${PDBCode.toUpperCase()} from the PDB`)
 
-            fetch_map(PDBCode).then((response: ArrayBuffer) => {
+            fetch_map(PDBCode).then((response: any) => {
                 let array = new Uint8Array(response)
                 setMtzData(array)
 
-            }).catch((e: any) => {
+            }).catch(() => {
                 setLoadingText("MTZ not found, continuing...")
             })
 
-            fetch_pdb(PDBCode).then((response: ArrayBuffer) => {
-                console.log(response)
+            fetch_pdb(PDBCode).then((response: any) => {
                 let array = new Uint8Array(response)
 
                 setFileContent(array)
@@ -63,7 +61,7 @@ export default function HomeSection() {
             })
 
         } else {
-            iris_module().then((Module) => {
+            iris_module().then((Module: any) => {
                 var coordinateReader = new FileReader();
                 var reflectionReader = new FileReader();
 
@@ -81,7 +79,9 @@ export default function HomeSection() {
                 }
 
                 reflectionReader.onload = async () => {
-                    let map_data = new Uint8Array(reflectionReader.result);
+                    let reader = reflectionReader.result;
+                    // @ts-ignore
+                    let map_data = new Uint8Array(reader);
                     setMtzData(map_data)
                     Module['FS_createDataFile']('/', "input.mtz", map_data, true, true, true)
                 }
@@ -91,30 +91,6 @@ export default function HomeSection() {
                 }
     
             })
-            // privateer_module().then((Module: { [x: string]: (arg0: string, arg1: string, arg2: Uint8Array, arg3: boolean, arg4: boolean, arg5: boolean) => void; }) => {
-
-
-            //     var coordinateReader = new FileReader();
-            //     var reflectionReader = new FileReader();
-
-            //     coordinateReader.onload = () => { run_iris(Module, coordinateReader.result, coordinateFile!.name) }
-
-            //     if (coordinateFile) {
-            //         coordinateReader.readAsText(coordinateFile);
-            //     }
-
-            //     reflectionReader.onload = async () => {
-            //         let map_data = new Uint8Array(reflectionReader.result);
-            //         setMtzData(map_data)
-
-            //         Module['FS_createDataFile']('/', "input.mtz", map_data, true, true, true)
-            //     }
-
-            //     if (reflectionFile) {
-            //         reflectionReader.readAsArrayBuffer(reflectionFile)
-            //     }
-
-            // }).catch((e: any) => console.log(e));
         }
 
 
@@ -124,7 +100,6 @@ export default function HomeSection() {
         setReflectionFile(null)
         setCoordinateFile(null)
         setSubmit(false)
-        setRingData(null)
         setFallBack(false)
         setResetApp(false)
         setPDBCode("")
@@ -142,7 +117,6 @@ export default function HomeSection() {
         setReflectionFile: setReflectionFile,
         submit: submit,
         setSubmit: setSubmit,
-        tableData: ringData,
         loadingText: loadingText,
         fileContent: fileContent,
         fallback: fallback,

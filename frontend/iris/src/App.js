@@ -1,4 +1,5 @@
-import { jsx as _jsx } from "react/jsx-runtime";
+import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+const _jsxFileName = "/Users/dialpuri/Development/iris-webapp/frontend/iris/src/App.tsx";
 // import './App.css'
 // import iris_module from "../api/iris.js"
 // import { useEffect, useState } from 'react'
@@ -192,6 +193,6 @@ import './App.css';
 import HomeSection from './pages/Home';
 import PageLoad from './components/Loading/PageLoad';
 function App() {
-    return (_jsx(Suspense, { fallback: _jsx(PageLoad, {}), children: _jsx("div", { className: 'flex flex-col', children: _jsx(HomeSection, {}) }) }));
+    return (_jsxDEV(Suspense, { fallback: _jsxDEV(PageLoad, {}, void 0, false, { fileName: _jsxFileName, lineNumber: 263, columnNumber: 25 }, this), children: _jsxDEV("div", { className: 'flex flex-col', children: _jsxDEV(HomeSection, {}, void 0, false, { fileName: _jsxFileName, lineNumber: 266, columnNumber: 9 }, this) }, void 0, false, { fileName: _jsxFileName, lineNumber: 265, columnNumber: 7 }, this) }, void 0, false, { fileName: _jsxFileName, lineNumber: 262, columnNumber: 11 }, this));
 }
 export default App;

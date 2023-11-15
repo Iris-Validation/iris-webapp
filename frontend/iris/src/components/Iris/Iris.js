@@ -1,4 +1,5 @@
-import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import { jsxDEV as _jsxDEV, Fragment as _Fragment } from "react/jsx-dev-runtime";
+const _jsxFileName = "/Users/dialpuri/Development/iris-webapp/frontend/iris/src/components/Iris/Iris.tsx";
 import ChainSelectionButtons from '../ChainSelectionButtons/ChainSelectionButtons.js';
 import { calculate_poly_line, calculate_poly_line_for_circle, calculate_center_line, calculate_text_position } from "../../functions/circle_functions.js";
 import { normalise_data } from "../../functions/data_manipulation.js";
@@ -47,18 +48,18 @@ function get_residue_data(results) {
     }
     return residue_names;
 }
-export default function Iris({ results }) {
+export default function Iris(props) {
     let center = [500, 500];
     const [residueData, setResidueData] = useState();
     const [selectedResidue, setSelectedResidue] = useState();
     const [combinedData, setCombinedData] = useState();
     const [chainListSet, setChainListSet] = useState(false);
-    const [chainList, setChainList] = useState();
-    const [selectedChain, setSelectedChain] = useState();
+    const [chainList, setChainList] = useState([""]);
+    const [selectedChain, setSelectedChain] = useState("");
     const [dataLength, setDataLength] = useState();
     const [rings, setRings] = useState();
     const [centerLinePoints, setCenterLinePoints] = useState();
-    const [ringTextData, setRingTextData] = useState([]);
+    const [ringTextData, setRingTextData] = useState();
     const colours = [
         { fill: "#ff758f", stroke: "#ff4d6d" },
         { fill: "#1a759f", stroke: "#1e6091" },
@@ -78,11 +79,13 @@ export default function Iris({ results }) {
         }
     }
     useEffect(() => {
-        let data = parse_results(results);
+        let data = parse_results(props.results);
         setCombinedData(data);
         var chain_list = [];
-        for (let i = 0; i < results.chain_labels.size(); i++) {
-            chain_list.push(results.chain_labels.get(i));
+        // @ts-ignore
+        for (let i = 0; i < props.results.chain_labels.size(); i++) {
+            // @ts-ignore
+            chain_list.push(props.results.chain_labels.get(i));
         }
         //
         setChainListSet(true);
@@ -91,6 +94,8 @@ export default function Iris({ results }) {
     }, []);
     useEffect(() => {
         if (!combinedData)
+            return;
+        if (!selectedChain)
             return;
         let current_chain_data = combinedData[selectedChain];
         if (!current_chain_data)
@@ -120,6 +125,8 @@ export default function Iris({ results }) {
     }, [selectedChain]);
     function handle_mouse_move(e) {
         var svg = document.getElementById("svg");
+        if (!svg)
+            return;
         var bounds = svg.getBoundingClientRect();
         var x = e.clientX - bounds.x;
         var y = e.clientY - bounds.y;
@@ -136,12 +143,12 @@ export default function Iris({ results }) {
         if (angle < 0) {
             angle += 360;
         }
-        if (residueData) {
-            let gap = 320 / residueData.length;
-            // console.log(residueData.length, gap)
-            // angle = Math.ceil(angle/gap)*gap
-        }
-        let highlighted_residue = get_current_residue(angle);
+        // if (residueData) {
+        //     let gap = 320 / residueData.length
+        //     // console.log(residueData.length, gap)
+        //     // angle = Math.ceil(angle/gap)*gap
+        // }
+        get_current_residue(angle);
         let center_line = calculate_center_line(center, angle, 450);
         setCenterLinePoints(center_line);
     }
@@ -155,15 +162,15 @@ export default function Iris({ results }) {
         center: [500, 500],
         header: 40,
         radius: 450,
-        number: dataLength,
+        number: dataLength ? dataLength : 0,
     };
-    return (_jsxs("div", { className: 'flex-col', children: [_jsxs("div", { className: 'flex h-12 text-center align-middle justify-center', children: [_jsx("span", { className: 'text-xl h-full align-middle text-center mr-2 my-2', children: "Chain" }), _jsx(ChainSelectionButtons, { ...chainSelectionButtonsProps }), _jsxs("span", { className: 'text-xl text-white ml-16 my-2 w-64', children: ["Residue: ", selectedResidue] })] }), _jsxs("svg", { id: "svg", xmlns: "http://www.w3.org/2000/svg", version: "1.1", xmlnsXlink: "http://www.w3.org/1999/xlink", xmlnssvgjs: "http://svgjs.dev/svgjs", width: "1000", height: "1000", viewBox: "0 0 1000 1000", onMouseMove: (e) => { handle_mouse_move(e); }, children: [_jsx(RingKnurling, { ...ringKurnlingProps }), ringTextData ?
+    return (_jsxDEV("div", { className: 'flex-col', children: [_jsxDEV("div", { className: 'flex h-12 text-center align-middle justify-center', children: [_jsxDEV("span", { className: 'text-xl h-full align-middle text-center mr-2 my-2', children: "Chain" }, void 0, false, { fileName: _jsxFileName, lineNumber: 221, columnNumber: 17 }, this), _jsxDEV(ChainSelectionButtons, { ...chainSelectionButtonsProps }, void 0, false, { fileName: _jsxFileName, lineNumber: 222, columnNumber: 17 }, this), _jsxDEV("span", { className: 'text-xl text-white ml-16 my-2 w-64', children: ["Residue: ", selectedResidue] }, void 0, true, { fileName: _jsxFileName, lineNumber: 224, columnNumber: 17 }, this)] }, void 0, true, { fileName: _jsxFileName, lineNumber: 220, columnNumber: 13 }, this), _jsxDEV("svg", { id: "svg", xmlns: "http://www.w3.org/2000/svg", version: "1.1", xmlnsXlink: "http://www.w3.org/1999/xlink", width: "1000", height: "1000", viewBox: "0 0 1000 1000", onMouseMove: (e) => { handle_mouse_move(e); }, children: [_jsxDEV(RingKnurling, { ...ringKurnlingProps }, void 0, false, { fileName: _jsxFileName, lineNumber: 229, columnNumber: 17 }, this), ringTextData ?
                         ringTextData.map((item, index) => {
-                            return _jsx("text", { x: item[0], y: item[1], fill: 'gray', children: item[2] }, index);
+                            return _jsxDEV("text", { x: item[0], y: item[1], fill: 'gray', children: item[2] }, index, false, { fileName: _jsxFileName, lineNumber: 233, columnNumber: 31 }, this);
                         }) :
-                        _jsx(_Fragment, {}), rings ?
+                        _jsxDEV(_Fragment, {}, void 0, false, { fileName: _jsxFileName, lineNumber: 234, columnNumber: 25 }, this), rings ?
                         rings.map((item, index) => {
-                            return _jsx("polyline", { points: item, fill: colours[index].fill, strokeWidth: "1", stroke: colours[index].stroke, fillOpacity: 0.2, fillRule: "evenodd" }, index);
+                            return _jsxDEV("polyline", { points: item, fill: colours[index].fill, strokeWidth: "1", stroke: colours[index].stroke, fillOpacity: 0.2, fillRule: "evenodd" }, index, false, { fileName: _jsxFileName, lineNumber: 240, columnNumber: 31 }, this);
                         })
-                        : _jsx(_Fragment, { children: "No rings" }), _jsx("polyline", { points: centerLinePoints, fill: "gray", strokeWidth: "1", stroke: "gray" })] })] }));
+                        : _jsxDEV(_Fragment, { children: "No rings" }, void 0, false, { fileName: _jsxFileName, lineNumber: 242, columnNumber: 22 }, this), _jsxDEV("polyline", { points: centerLinePoints, fill: "gray", strokeWidth: "1", stroke: "gray" }, void 0, false, { fileName: _jsxFileName, lineNumber: 245, columnNumber: 17 }, this)] }, void 0, true, { fileName: _jsxFileName, lineNumber: 227, columnNumber: 13 }, this)] }, void 0, true, { fileName: _jsxFileName, lineNumber: 217, columnNumber: 13 }, this));
 }

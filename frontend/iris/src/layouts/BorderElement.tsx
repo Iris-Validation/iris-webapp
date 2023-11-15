@@ -1,12 +1,14 @@
-export default function BorderElement({topColor, bottomColor, reverse}) {
+import { BorderElementProps } from "../interface/interface";
+
+export default function BorderElement(props: BorderElementProps) {
 
     const divStyle = {
         height: "90px",
-        backgroundImage: `linear-gradient(to bottom right, ${topColor}, ${topColor} 50%, ${bottomColor} 50%, ${bottomColor})`
+        backgroundImage: `linear-gradient(to bottom right, ${props.topColor}, ${props.topColor} 50%, ${props.bottomColor} 50%, ${props.bottomColor})`
     };
 
-    if (reverse) {
-        divStyle['backgroundImage'] = `linear-gradient(to top right, ${bottomColor}, ${bottomColor} 50%, ${topColor} 50%, ${topColor})`
+    if (props.reverse) {
+        divStyle['backgroundImage'] = `linear-gradient(to top right, ${props.bottomColor}, ${props.bottomColor} 50%, ${props.topColor} 50%, ${props.topColor})`
     }
 
     return (

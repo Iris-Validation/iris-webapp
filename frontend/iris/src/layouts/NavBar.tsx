@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
-import {GENERAL_CITATION, GITHUB_REPO} from "../data/Constants.tsx"
+import {GITHUB_REPO} from "../data/Constants"
 
 export default function NavBar({setResetApp}: {setResetApp: Dispatch<SetStateAction<boolean>>}) {
 

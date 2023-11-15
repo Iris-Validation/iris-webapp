@@ -1,4 +1,4 @@
-import {TORSIONS_CITATION, GLYCOMICS_CITATION} from "../../data/Constants"
+// import {TORSIONS_CITATION, GLYCOMICS_CITATION} from "../../data/Constants"
 
 export function Information({}) {
     return <div className="text-secondary bg-tertiary pb-12">

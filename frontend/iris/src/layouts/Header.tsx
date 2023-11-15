@@ -1,20 +1,20 @@
 import { lazy, Suspense } from 'react'
 
-const Upload = lazy(() => import('../components/Upload/Upload.tsx'));
-const Loading = lazy(() => import('../components/Loading/Loading.tsx'));
-const NavBar = lazy(() => import('./NavBar.tsx'));
+const Upload = lazy(() => import('../components/Upload/Upload'));
+const Loading = lazy(() => import('../components/Loading/Loading'));
+const NavBar = lazy(() => import('./NavBar'));
 
-import Iris from '../components/Iris/Iris.tsx';
+import Iris from '../components/Iris/Iris';
+import { HeaderProps } from '../interface/interface';
 
 export function Header(props: HeaderProps) {
     
-    let filename = ""
-    if (props.PDBCode != "") { 
-        filename = props.PDBCode
-    }
-    else if (props.coordinateFile) { 
-        filename = props.coordinateFile.name
-    }
+    // if (props.PDBCode != "") { 
+    //     let filename = props.PDBCode
+    // }
+    // else if (props.coordinateFile) { 
+    //     let filename = props.coordinateFile.name
+    // }
 
     return (
         <div className="bg-gray text-primary">
@@ -26,10 +26,7 @@ export function Header(props: HeaderProps) {
                             <Upload {...props} />
                                 : props.results === null ?
                                     <Loading loadingText={props.loadingText} /> :
-                                    <Iris results={props.results}></Iris>
-
-                                    // <SNFG {...props} filename={filename}
-                                    // ></SNFG>
+                                        <Iris results={props.results}></Iris>
                                     }
                     </Suspense>
                     : <></>

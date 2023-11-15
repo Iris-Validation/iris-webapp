@@ -1,37 +1,53 @@
-interface RingKnurlingType { 
-    header: string
+export interface RingKnurlingType { 
+    header: number
     radius: number
     number: number
     center: Array<number>
 }
 
+export interface BorderElementProps { 
+    topColor: string
+    bottomColor: string
+    reverse: boolean
+}
+export interface SubmitProps { 
+    coordinateFile: any
+    reflectionFile: any
+    submitPressed: Dispatch<SetStateAction<boolean>>
+    setResetApp: Dispatch<SetStateAction<boolean>>
+    allowSubmit: boolean
+}
+
+export interface FileLineProps { 
+    name: string
+    icon: any
+}
+
+export interface PDBFetch { 
+    PDBCode: string 
+    setPDBCode: Dispatch<SetStateAction<string>>
+    submitPressed: Dispatch<SetStateAction<boolean>>
+}
+
+interface IrisResults { 
+    chain_labels: Array<number>
+}
+export interface IrisProps { 
+    results: IrisResults
+}
+
 import { Dispatch, SetStateAction } from "react";
 
-
-export interface TableDataEntry { 
-    svg: string, 
-    wurcs: string, 
-    chain: string, 
-    glyconnect_id: string, 
-    glytoucan_id: string,
-    id: string, 
-    torsion_err: number, 
-    conformation_err: number, 
-    anomer_err: number, 
-    puckering_err: number, 
-    chirality_err: number, 
-    torsions: Array<TorsionEntry>
-}
 
 export interface HeaderProps { 
     resetApp: boolean,
     setResetApp: Dispatch<SetStateAction<boolean>>,
     PDBCode: string,
     setPDBCode: Dispatch<SetStateAction<string>>,
-    // coordinateFile: File | null,
-    // setCoordinateFile: Dispatch<SetStateAction<File | null>>,
-    // reflectionFile: File | null,
-    // setReflectionFile: Dispatch<SetStateAction<File | null>>,
+    coordinateFile: File | null,
+    setCoordinateFile: Dispatch<SetStateAction<File | null>>,
+    reflectionFile: File | null,
+    setReflectionFile: Dispatch<SetStateAction<File | null>>,
     submit: boolean,
     setSubmit: Dispatch<SetStateAction<boolean>>,
     loadingText: string,
@@ -42,37 +58,16 @@ export interface HeaderProps {
     results: any
 }
 
-export interface SNFGProps extends HeaderProps { 
-    filename: string
-}
-
 export interface UploadButtonProps { 
     setCoordinateFile: Dispatch<SetStateAction<File | null>>,
     setReflectionFile: Dispatch<SetStateAction<File | null>>
 }
 
-export interface GlycanDetailProps { 
-    tableData: Array<TableDataEntry>, 
-    hideMoorhen: boolean, 
-    setHideMoorhen: Dispatch<SetStateAction<boolean>>,
-    rowID: number, 
-    forwardControls: any, 
-    scrollPosition: number, 
-    controls: any, 
-    molecule: any, 
-    map: any
+export interface ChainSelectionButtonsTypes { 
+    chainList: Array<string>
+    chainListSet: boolean
+    selectedChain: string 
+    setSelectedChain: Dispatch<SetStateAction<string>>
 }
 
-export interface NoGlycansProps { 
-    setResetApp: Dispatch<SetStateAction<boolean>>, 
-    text: string
-}
-
-export interface SVGTableProps { 
-    tableData: Array<TableDataEntry>, 
-    allowRowClick: boolean, 
-    rowClick: boolean,
-    setRowClicked: Dispatch<SetStateAction<boolean>>, 
-    setRowID: Dispatch<SetStateAction<number>>
-}
 
