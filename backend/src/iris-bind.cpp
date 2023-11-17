@@ -3,30 +3,36 @@
 #include <clipper/clipper-ccp4.h>
 #include <clipper/clipper-contrib.h>
 #include <clipper/clipper-minimol.h>
-#include <fstream>
 
 #include "iris-backend.h"
 #include <iostream>
 
 using namespace emscripten; 
 
-
 ResultsBinding calculate() {
 
     AverageBFactorMetric* average_b_factor_metric = new AverageBFactorMetric;
     MaxBFactorMetric* max_b_factor_metric = new MaxBFactorMetric;
+    MainChainFit* main_chain_fit_metric = new MainChainFit;
+    SideChainFit* side_chain_fit_metric = new SideChainFit;
+    RamachandranMetric* ramachandran_metric = new RamachandranMetric;
 
     std::vector<AbstractMetric*> metrics = {
             average_b_factor_metric,
             max_b_factor_metric,
+            main_chain_fit_metric, 
+            side_chain_fit_metric, 
+            ramachandran_metric
     };
 
-    CalculatedMetrics calculated_metrics = CalculatedMetrics("/input.pdb", metrics);
+    CalculatedMetrics calculated_metrics = CalculatedMetrics(metrics);
     ResultsBinding results = calculated_metrics.calculate();
 
     delete average_b_factor_metric;
-    delete max_b_factor_metric;
-
+    delete max_b_factor_metric; 
+    delete main_chain_fit_metric;
+    delete side_chain_fit_metric;
+    delete ramachandran_metric;
     return results;
 }
 

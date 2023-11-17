@@ -83,8 +83,8 @@ export default function Iris(props: IrisProps) {
     const colours = [
         { fill: "#ff758f", stroke: "#ff4d6d" },
         { fill: "#1a759f", stroke: "#1e6091" },
-        { fill: "#ff758f", stroke: "#ff4d6d" },
-        { fill: "#1a759f", stroke: "#1e6091" },
+        { fill: "#669D31", stroke: "#71B340" },
+        { fill: "#634B66", stroke: "#9590A8" },
         { fill: "#1a759f", stroke: "#1e6091" },
 
     ]

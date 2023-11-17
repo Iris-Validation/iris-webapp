@@ -3,8 +3,8 @@ project(iris LANGUAGES C CXX)
 
 # set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
-SET(iris_CC_FLAGS "-O0 -w")
-SET(iris_CXX_FLAGS "-O0 -w -fwasm-exceptions -I${CMAKE_INSTALL_PREFIX}/include --bind -lnodefs.js --profiling")
+SET(iris_CC_FLAGS "-O2 -w")
+SET(iris_CXX_FLAGS "-O2 -w -fwasm-exceptions -I${CMAKE_INSTALL_PREFIX}/include --bind -lnodefs.js --profiling")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${iris_CC_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${iris_CXX_FLAGS} ")
 # add_compile_options(-std=c++11)
@@ -18,6 +18,8 @@ set(CMAKE_CXX_STANDARD 11)
 add_link_options(-sDEFAULT_PTHREAD_STACK_SIZE=2MB -sSTACK_SIZE=5MB)
 add_compile_options(--preload-file data@/)
 
+if (MODE STREQUAL "TESTING") 
+else() 
 add_subdirectory(fftw)
 add_subdirectory(rfftw)
 add_subdirectory(ccp4)
@@ -30,16 +32,20 @@ add_subdirectory(clipper/cns)
 add_subdirectory(clipper/mmdb)
 add_subdirectory(clipper/cif)
 add_subdirectory(clipper/phs)
+endif()
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
     checkout/mmdb2 
     checkout/clipper 
+    checkout/gemmi/include
+    checkout/libccp4/ccp4 
 )
 
 link_directories(
     checkout/mmdb2
     checkout/clipper
+    checkout/libccp4/ccp4     
     ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
@@ -66,6 +72,8 @@ target_link_directories(iris_exec
  clipper/minimol
  fftw 
  rfftw 
+ ccp4
+ ../checkout/gemmi
  )
 
 target_link_libraries(

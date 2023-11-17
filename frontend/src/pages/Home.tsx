@@ -2,8 +2,10 @@ import { lazy, useEffect, useState } from "react";
 
 import { Header } from '../layouts/Header';
 import { Information } from '../components/Information/Information';
-// @ts-ignore
-import iris_module from "../../api/iris.js"
+
+//@ts-ignore
+import iris_module from "../api/iris"
+// const iris_module = lazy(() => import("../api/iris"))
 
 const Footer = lazy(() => import('../layouts/Footer'));
 const BorderElement = lazy(() => import('../layouts/BorderElement'));
@@ -17,6 +19,7 @@ export default function HomeSection() {
     const [PDBCode, setPDBCode] = useState<string>("")
     const [fileContent, setFileContent] = useState<string | ArrayBuffer>("")
     const [mtzData, setMtzData] = useState<Uint8Array | null>(null)
+    // const [mapData, setMapData] = useState<Uint8Array | null>(null)
     const [submit, setSubmit] = useState<boolean>(false);
     const [loadingText, setLoadingText] = useState<string>("Validating Glycans...");
     const [resetApp, setResetApp] = useState<boolean>(false)
@@ -24,13 +27,9 @@ export default function HomeSection() {
     const [failureText, setFailureText] = useState<string>("")
     const [results, setResults] = useState<any>(null)
 
-    async function run_iris(Module: any, response: any) {
-        Module['FS_createDataFile']('/', "input.mtz", mtzData, true, true, true)
-        Module['FS_createDataFile']('/', "input.pdb", response, true, true, true)
-
+    async function run_iris(Module: any) {
         let x = Module.test()
 
-        console.log(x)
         setResults(x);
         setFailureText("")
     }   
@@ -39,10 +38,10 @@ export default function HomeSection() {
         if (PDBCode != "") {
             console.log(PDBCode)
             setLoadingText(`Fetching ${PDBCode.toUpperCase()} from the PDB`)
-
+            
+            let map_data;
             fetch_map(PDBCode).then((response: any) => {
-                let array = new Uint8Array(response)
-                setMtzData(array)
+                map_data = new Uint8Array(response)
 
             }).catch(() => {
                 setLoadingText("MTZ not found, continuing...")
@@ -54,7 +53,14 @@ export default function HomeSection() {
                 setFileContent(array)
                 setLoadingText("Generating Iris Report...")
 
-                iris_module().then((Module: any) => run_iris(Module, response))
+                iris_module().then((Module: any) => {
+                    Module['FS_createDataFile']('/', "input.map", map_data, true, true, true)
+                    Module['FS_createDataFile']('/', "input.pdb", response, true, true, true)
+
+                    run_iris(Module)
+                    
+                })
+                
 
             }).catch((e: any) => {
                 console.log(e)

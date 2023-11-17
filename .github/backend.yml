@@ -1,0 +1,52 @@
+
+name: Privateer Web App Backend
+
+on:
+  push:
+    branches: [ "master" ]
+    paths: 
+      - backend/src/*.cpp
+
+  pull_request:
+    branches: [ "master" ]
+    paths: 
+      - backend/src/*.cpp
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+ 
+    - name: Check out dependencies
+      run : |
+        cd backend
+        git clone https://github.com/emscripten-core/emsdk.git
+        cd emsdk
+        git pull
+        ./emsdk install latest
+        ./emsdk activate latest
+        cd ..
+    
+    - name: Check out libraries
+      run : |
+        cd backend
+        git clone https://github.com/Dialpuri/privateer_webserver_dependencies.git 
+        cd privateer_webserver_dependencies
+        cp -r * ../
+        cd .. 
+
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.13    
+    
+    - name: Build
+      run : | 
+        cd backend
+        source ./emsdk/emsdk_env.sh
+        ls checkout
+        emcmake cmake . -D MODE=TESTING
+        emmake make -j 
+
+    
