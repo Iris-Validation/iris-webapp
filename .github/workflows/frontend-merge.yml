@@ -2,7 +2,7 @@ name: Iris Web App Frontend CI/CD
 
 on:
   push:
-    branches: [ "webapp" ]
+    branches: [ "master" ]
     paths: 
       - frontend/**
 

@@ -1,5 +1,5 @@
 
-name: Privateer Web App Backend
+name: Iris Web App Backend
 
 on:
   push:

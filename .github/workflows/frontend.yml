@@ -1,4 +1,4 @@
-name: Privateer Web App Frontend CI/CD
+name: Iris Web App Frontend CI/CD
 
 on:
   pull_request:
