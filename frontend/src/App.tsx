@@ -7,7 +7,6 @@
 // import {normalise_data} from "./functions/data_manipulation.js"
 // import RingKnurling from './components/RingKnurling/RingKnurling'
 
-
 // function extract_metric_values(results: any) {
 //   let first_value = results[Object.keys(results)[0]]
 //   let metrics = {}
