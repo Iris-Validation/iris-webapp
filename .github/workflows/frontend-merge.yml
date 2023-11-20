@@ -1,4 +1,4 @@
-name: Iris Web App Frontend CI/CD
+name: Iris Web App Frontend Merge CI/CD
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.ftp_server_ip}}
-          username: ${{ secrets.ftp_user }
+          username: ${{ secrets.ftp_user }}
           password: ${{ secrets.ftp_password }}
           protocol: ${{ secrets.ftp_protocol }}
           port: ${{ secrets.ftp_port }}
