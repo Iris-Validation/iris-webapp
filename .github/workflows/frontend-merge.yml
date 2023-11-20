@@ -20,8 +20,7 @@ jobs:
           export NODE_OPTIONS=--max-old-space-size=8192
           cd webserver
           npm ci
-          npm run build 
-          cp ../.htaccess dist
+          npm run build-ci
           mv dist public_html
           cd ..
       
