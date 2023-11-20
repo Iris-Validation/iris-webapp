@@ -4,21 +4,19 @@ import { calculate_poly_line, calculate_poly_line_for_circle, calculate_center_l
 import { normalise_data } from "../../functions/data_manipulation.js"
 import RingKnurling from '../RingKnurling/RingKnurling'
 import { useEffect, useState } from 'react'
-import { IrisProps } from '../../interface/interface'
+import { IrisProps, Metric } from '../../interface/interface'
 
 function extract_metric_values(results: any) {
-    let first_value = results[Object.keys(results)[0]]
-    let metrics: Record<string, Array<number>> = {}
-
-    // Init metric obj for however many metrics there are
-    for (let i = 0; i < first_value.length; i++) {
-        let current_data = first_value[i];
-        metrics[current_data.metric] = []
-    }
+    let metrics: Record<string, Metric> = {}
 
     for (const data in results) {
         for (let j = 0; j < results[data].length; j++) {
-            metrics[results[data][j].metric].push(results[data][j].value)
+            if (results[data][j].metric in metrics) {
+                metrics[results[data][j].metric].array.push(results[data][j].value)
+            }
+            else {
+                metrics[results[data][j].metric] = { array: [results[data][j].value], type: results[data][j].type }
+            }
         }
     }
 
@@ -128,7 +126,7 @@ export default function Iris(props: IrisProps) {
     useEffect(() => {
 
         if (!combinedData) return
-        if (!selectedChain) return 
+        if (!selectedChain) return
 
         let current_chain_data = combinedData[selectedChain]
         if (!current_chain_data) return
@@ -141,18 +139,24 @@ export default function Iris(props: IrisProps) {
         let current_rings = []
         let current_ring_text = []
         let dataLength = 0;
+
         for (const metric in metrics) {
-            let normalised = normalise_data(metrics[metric])
-            const polyline = calculate_poly_line(center, current_radius, normalised)
+
+            let normalised = normalise_data(metrics[metric].array)
+            let polyline = calculate_poly_line(center, current_radius, normalised)
+
             const center_ring = calculate_poly_line_for_circle(center, current_radius)
             const points = polyline + center_ring;
 
             let residue_data = get_residue_data(current_chain_data)
             setResidueData(residue_data)
+
             let ring_text_pos = calculate_text_position(center, metric, current_radius)
             current_ring_text.push([...ring_text_pos, metric])
+
             current_rings.push(points)
             current_radius -= 50
+
             dataLength = normalised.length
 
         }
@@ -211,7 +215,7 @@ export default function Iris(props: IrisProps) {
         center: [500, 500],
         header: 40,
         radius: 450,
-        number: dataLength ? dataLength: 0,
+        number: dataLength ? dataLength : 0,
     }
 
     return (

@@ -4,7 +4,6 @@ export interface RingKnurlingType {
     number: number
     center: Array<number>
 }
-
 export interface BorderElementProps { 
     topColor: string
     bottomColor: string
@@ -34,6 +33,11 @@ interface IrisResults {
 }
 export interface IrisProps { 
     results: IrisResults
+}
+
+export interface Metric {
+    array: Array<number>
+    type: string
 }
 
 import { Dispatch, SetStateAction } from "react";

@@ -11,6 +11,7 @@ struct ResidueResult
     float value;
     int seqnum;
     std::string metric;
+    std::string type;
 };
 
 struct ChainResult
@@ -27,74 +28,78 @@ struct ResultsBinding
 
 struct AbstractMetric
 {
-    virtual ResidueResult score(clipper::MMonomer &monomer, clipper::Xmap<float> *xmap = nullptr) const = 0;
-    virtual ResidueResult score(clipper::MMonomer &previous_residue,
-                                clipper::MMonomer &monomer,
-                                clipper::MMonomer &next_residue,
-                                clipper::Xmap<float> *xmap = nullptr) const = 0;
+    virtual ResidueResult score(clipper::MMonomer &monomer,
+                                clipper::Xmap<float> *xmap = nullptr,
+                                clipper::MMonomer *previous_residue = nullptr,
+                                clipper::MMonomer *next_residue = nullptr) const = 0;
     int scale = 50;
-    bool use_surrounding_residues = false;
-    virtual std::string get_name() = 0;
+    virtual bool get_use_surrounding_residues() const = 0;
+    virtual std::string get_name() const = 0;
+    virtual std::string get_type() const = 0;
 };
 
 struct AverageBFactorMetric : public AbstractMetric
 {
-    ResidueResult score(clipper::MMonomer &monomer, clipper::Xmap<float> *xmap = nullptr) const override;
-    ResidueResult score(clipper::MMonomer &previous_residue,
-                        clipper::MMonomer &monomer,
-                        clipper::MMonomer &next_residue,
-                        clipper::Xmap<float> *xmap = nullptr) const override {}
-    std::string get_name() { return name; }
+    ResidueResult score(clipper::MMonomer &monomer,
+                        clipper::Xmap<float> *xmap = nullptr,
+                        clipper::MMonomer *previous_residue = nullptr,
+                        clipper::MMonomer *next_residue = nullptr) const override;
 
-    std::string name = "Average B Factor";
+    bool get_use_surrounding_residues() const { return false; }
+
+    std::string get_name() const { return "Average B Factor"; }
+    std::string get_type() const { return "continuous"; }
 };
 
 struct MaxBFactorMetric : public AbstractMetric
 {
-    ResidueResult score(clipper::MMonomer &monomer, clipper::Xmap<float> *xmap = nullptr) const override;
-    ResidueResult score(clipper::MMonomer &previous_residue,
-                        clipper::MMonomer &monomer,
-                        clipper::MMonomer &next_residue,
-                        clipper::Xmap<float> *xmap = nullptr) const override {}
-    std::string get_name() { return name; }
+    ResidueResult score(clipper::MMonomer &monomer,
+                        clipper::Xmap<float> *xmap = nullptr,
+                        clipper::MMonomer *previous_residue = nullptr,
+                        clipper::MMonomer *next_residue = nullptr) const override;
 
-    std::string name = "Max B Factor";
+    bool get_use_surrounding_residues() const { return false; }
+    std::string get_name() const { return "Max B Factor"; }
+    std::string get_type() const { return "continuous"; }
 };
 
 struct MainChainFit : public AbstractMetric
 {
-    ResidueResult score(clipper::MMonomer &monomer, clipper::Xmap<float> *xmap = nullptr) const override;
-    ResidueResult score(clipper::MMonomer &previous_residue,
-                        clipper::MMonomer &monomer,
-                        clipper::MMonomer &next_residue,
-                        clipper::Xmap<float> *xmap = nullptr) const override {}
+    ResidueResult score(clipper::MMonomer &monomer,
+                        clipper::Xmap<float> *xmap = nullptr,
+                        clipper::MMonomer *previous_residue = nullptr,
+                        clipper::MMonomer *next_residue = nullptr) const override;
     int scale = 20;
-    std::string get_name() { return name; }
-
-    std::string name = "Main Chain Fit";
+    bool get_use_surrounding_residues() const { return false; }
+    std::string get_name() const { return "Main Chain Fit"; }
+    std::string get_type() const { return "continuous"; }
 };
 
 struct SideChainFit : public AbstractMetric
 {
-    ResidueResult score(clipper::MMonomer &monomer, clipper::Xmap<float> *xmap = nullptr) const override;
-    ResidueResult score(clipper::MMonomer &previous_residue,
-                        clipper::MMonomer &monomer,
-                        clipper::MMonomer &next_residue,
-                        clipper::Xmap<float> *xmap = nullptr) const override {}
+    ResidueResult score(clipper::MMonomer &monomer,
+                        clipper::Xmap<float> *xmap = nullptr,
+                        clipper::MMonomer *previous_residue = nullptr,
+                        clipper::MMonomer *next_residue = nullptr) const override;
     int scale = 20;
-    std::string get_name() { return name; }
-
-    std::string name = "Side Chain Fit";
+    bool get_use_surrounding_residues() const { return false; }
+    std::string get_name() const { return "Side Chain Fit"; }
+    std::string get_type() const { return "continuous"; }
 };
 
 struct RamachandranMetric : public AbstractMetric
 {
-    ResidueResult score(clipper::MMonomer &monomer, clipper::Xmap<float> *xmap = nullptr) const override {}
-    ResidueResult score(clipper::MMonomer &previous_residue, clipper::MMonomer &monomer, clipper::MMonomer &next_residue, clipper::Xmap<float> *xmap = nullptr) const override;
-    bool use_surrounding_residues = true;
-    std::string get_name() { return name; }
+    ResidueResult score(clipper::MMonomer &monomer,
+                        clipper::Xmap<float> *xmap = nullptr,
+                        clipper::MMonomer *previous_residue = nullptr,
+                        clipper::MMonomer *next_residue = nullptr) const override;
 
-    std::string name = "RamaMetric Fit";
+    float calculate_probability(clipper::MMonomer &monomer, float phi, float psi) const;
+
+    int scale = 10;
+    bool get_use_surrounding_residues() const { return true; }
+    std::string get_name() const { return "Ramachandran"; }
+    std::string get_type() const { return "continuous"; }
 };
 
 enum RunMode

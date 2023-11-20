@@ -4,18 +4,19 @@ import { Header } from '../layouts/Header';
 import { Information } from '../components/Information/Information';
 
 //@ts-ignore
-import iris_module from "../api/iris"
+// import iris_module from "../api/iris-api.js"
+import iris_module from "../api/iris-api.js";
 // const iris_module = lazy(() => import("../api/iris"))
 
 const Footer = lazy(() => import('../layouts/Footer'));
 const BorderElement = lazy(() => import('../layouts/BorderElement'));
- 
-import {HeaderProps} from "../interface/interface"
+
+import { HeaderProps } from "../interface/interface"
 import { fetch_map, fetch_pdb } from "../utils/fetch_from_pdb";
 
 export default function HomeSection() {
     const [coordinateFile, setCoordinateFile] = useState<File | null>(null);
-    const [reflectionFile, setReflectionFile] = useState<File| null>(null);
+    const [reflectionFile, setReflectionFile] = useState<File | null>(null);
     const [PDBCode, setPDBCode] = useState<string>("")
     const [fileContent, setFileContent] = useState<string | ArrayBuffer>("")
     const [mtzData, setMtzData] = useState<Uint8Array | null>(null)
@@ -28,78 +29,67 @@ export default function HomeSection() {
     const [results, setResults] = useState<any>(null)
 
     async function run_iris(Module: any) {
-        let x = Module.test()
+        let x = Module.test();
 
         setResults(x);
         setFailureText("")
-    }   
+    }
 
     useEffect(() => {
-        if (PDBCode != "") {
-            console.log(PDBCode)
-            setLoadingText(`Fetching ${PDBCode.toUpperCase()} from the PDB`)
-            
-            let map_data;
-            fetch_map(PDBCode).then((response: any) => {
-                map_data = new Uint8Array(response)
+        async function load_data() {
+            if (PDBCode != "") {
+                console.log(PDBCode)
+                setLoadingText(`Fetching ${PDBCode.toUpperCase()} from the PDB`)
 
-            }).catch(() => {
-                setLoadingText("MTZ not found, continuing...")
-            })
+                let map_response = await fetch_map(PDBCode)
+                let pdb_response = await fetch_pdb(PDBCode)
+                let map_data = new Uint8Array(map_response)
+                let pdb_data = new Uint8Array(pdb_response as unknown as ArrayBuffer)
 
-            fetch_pdb(PDBCode).then((response: any) => {
-                let array = new Uint8Array(response)
-
-                setFileContent(array)
+                setFileContent(pdb_data)
                 setLoadingText("Generating Iris Report...")
 
                 iris_module().then((Module: any) => {
                     Module['FS_createDataFile']('/', "input.map", map_data, true, true, true)
-                    Module['FS_createDataFile']('/', "input.pdb", response, true, true, true)
+                    Module['FS_createDataFile']('/', "input.pdb", pdb_response, true, true, true)
 
                     run_iris(Module)
-                    
                 })
-                
+            }
+            else {
+                iris_module().then((Module: any) => {
+                    var coordinateReader = new FileReader();
+                    var reflectionReader = new FileReader();
 
-            }).catch((e: any) => {
-                console.log(e)
-            })
+                    coordinateReader.onload = () => {
+                        Module['FS_createDataFile']('/', "input.pdb", coordinateReader.result, true, true, true)
 
-        } else {
-            iris_module().then((Module: any) => {
-                var coordinateReader = new FileReader();
-                var reflectionReader = new FileReader();
+                        let x = Module.test()
 
-                coordinateReader.onload = () => { 
-                    Module['FS_createDataFile']('/', "input.pdb", coordinateReader.result, true, true, true)
+                        setResults(x);
+                    }
 
-                    let x = Module.test()
+                    if (coordinateFile) {
+                        coordinateReader.readAsText(coordinateFile);
 
-                    setResults(x);                
-                }
+                    }
 
-                if (coordinateFile) {
-                    coordinateReader.readAsText(coordinateFile);
+                    reflectionReader.onload = async () => {
+                        let reader = reflectionReader.result;
+                        // @ts-ignore
+                        let map_data = new Uint8Array(reader);
+                        setMtzData(map_data)
+                        Module['FS_createDataFile']('/', "input.mtz", map_data, true, true, true)
+                    }
 
-                }
+                    if (reflectionFile) {
+                        reflectionReader.readAsArrayBuffer(reflectionFile)
+                    }
 
-                reflectionReader.onload = async () => {
-                    let reader = reflectionReader.result;
-                    // @ts-ignore
-                    let map_data = new Uint8Array(reader);
-                    setMtzData(map_data)
-                    Module['FS_createDataFile']('/', "input.mtz", map_data, true, true, true)
-                }
-
-                if (reflectionFile) {
-                    reflectionReader.readAsArrayBuffer(reflectionFile)
-                }
-    
-            })
+                })
+            }
         }
-
-
+        load_data()
     }, [submit])
 
     useEffect(() => {
@@ -127,7 +117,7 @@ export default function HomeSection() {
         fileContent: fileContent,
         fallback: fallback,
         mtzData: mtzData,
-        failureText: failureText, 
+        failureText: failureText,
         results: results
     }
 

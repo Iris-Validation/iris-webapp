@@ -64,6 +64,8 @@
         "fstream": "cpp",
         "iomanip": "cpp",
         "coroutine": "cpp",
-        "*.inc": "cpp"
+        "*.inc": "cpp",
+        "__memory": "cpp",
+        "regex": "cpp"
     }
 }

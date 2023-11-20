@@ -1,8 +1,10 @@
 #include "iris-backend.h"
 
-ResidueResult AverageBFactorMetric::score(clipper::MMonomer &monomer, clipper::Xmap<float> *xmap) const
+ResidueResult AverageBFactorMetric::score(clipper::MMonomer &monomer,
+                                          clipper::Xmap<float> *xmap,
+                                          clipper::MMonomer *previous_residue,
+                                          clipper::MMonomer *next_residue) const
 {
-    std::cout << "Avg b fac score" << std::endl;
     float total_bfac = 0.0f;
     for (int a = 0; a < monomer.size(); a++)
     {
@@ -13,13 +15,16 @@ ResidueResult AverageBFactorMetric::score(clipper::MMonomer &monomer, clipper::X
     result.value = scale * total_bfac / monomer.size();
     result.name = monomer.type();
     result.seqnum = monomer.seqnum();
-    result.metric = "Average B Factor";
+    result.metric = get_name();
+    result.type = get_type();
     return result;
 }
 
-ResidueResult MaxBFactorMetric::score(clipper::MMonomer &monomer, clipper::Xmap<float> *xmap) const
+ResidueResult MaxBFactorMetric::score(clipper::MMonomer &monomer,
+                                      clipper::Xmap<float> *xmap,
+                                      clipper::MMonomer *previous_residue,
+                                      clipper::MMonomer *next_residue) const
 {
-    std::cout << "Max Bfac score" << std::endl;
     float max = -1e9;
     for (int a = 0; a < monomer.size(); a++)
     {
@@ -33,14 +38,18 @@ ResidueResult MaxBFactorMetric::score(clipper::MMonomer &monomer, clipper::Xmap<
     result.value = scale * max;
     result.name = monomer.type();
     result.seqnum = monomer.seqnum();
-    result.metric = "Max B Factor";
+    result.metric = get_name();
+    result.type = get_type();
+
     return result;
 }
 
-ResidueResult MainChainFit::score(clipper::MMonomer &monomer, clipper::Xmap<float> *xmap) const
+ResidueResult MainChainFit::score(clipper::MMonomer &monomer,
+                                  clipper::Xmap<float> *xmap,
+                                  clipper::MMonomer *previous_residue,
+                                  clipper::MMonomer *next_residue) const
 {
     float score = 0;
-    std::cout << "MCFit score" << std::endl;
     std::vector<std::string> main_chain_atoms = {"C", "CA", "N", "O", "OXT"};
 
     int atoms_found = 0;
@@ -63,11 +72,16 @@ ResidueResult MainChainFit::score(clipper::MMonomer &monomer, clipper::Xmap<floa
     result.value = value;
     result.name = monomer.type();
     result.seqnum = monomer.seqnum();
-    result.metric = "Main Chain Fit";
+    result.metric = get_name();
+    result.type = get_type();
+
     return result;
 }
 
-ResidueResult SideChainFit::score(clipper::MMonomer &monomer, clipper::Xmap<float> *xmap) const
+ResidueResult SideChainFit::score(clipper::MMonomer &monomer,
+                                  clipper::Xmap<float> *xmap,
+                                  clipper::MMonomer *previous_residue,
+                                  clipper::MMonomer *next_residue) const
 {
     float score = 0;
 
@@ -84,29 +98,106 @@ ResidueResult SideChainFit::score(clipper::MMonomer &monomer, clipper::Xmap<floa
             atoms_found++;
         }
     }
+    
     float value = scale * score / atoms_found;
+
+    if (value >= 0.7 * scale) { 
+        value = scale;
+    }
+
     if (atoms_found == 0)
     {
         value = 0;
     }
+
     ResidueResult result;
     result.value = value;
     result.name = monomer.type();
     result.seqnum = monomer.seqnum();
-    result.metric = "Side Chain Fit";
+    result.metric = get_name();
+    result.type = get_type();
+
     return result;
 }
 
-ResidueResult RamachandranMetric::score(clipper::MMonomer &previous_residue,
-                                        clipper::MMonomer &monomer,
-                                        clipper::MMonomer &next_residue,
-                                        clipper::Xmap<float> *xmap) const { 
+float RamachandranMetric::calculate_probability(clipper::MMonomer &monomer, float phi, float psi) const
+{
 
-    float phi = clipper::MMonomer::protein_ramachandran_phi(previous_residue, monomer);
-    float psi = clipper::MMonomer::protein_ramachandran_psi(monomer, next_residue);
+    std::string type = monomer.type();
+    clipper::Ramachandran rama;
+    rama.set_thresholds(0.02, 0.002);
 
-    std::cout << "Rama: " << phi << " " << psi << std::endl;
+    if (type == "GLY")
+    {
+        rama.init(clipper::Ramachandran::Gly2);
+    }
+    else if (type == "PRO")
+    {
+        rama.init(clipper::Ramachandran::Pro2);
+    }
+    else if (type == "ILE" || type == "VAL")
+    {
+        rama.init(clipper::Ramachandran::IleVal2);
+    }
+    else
+    {
+        rama.init(clipper::Ramachandran::NoGPIVpreP2);
+    }
 
+    return rama.probability(phi, psi);
+}
+
+ResidueResult RamachandranMetric::score(clipper::MMonomer &monomer,
+                                        clipper::Xmap<float> *xmap,
+                                        clipper::MMonomer *previous_residue,
+                                        clipper::MMonomer *next_residue) const
+{
+
+    clipper::ftype phi = clipper::Util::nan();
+    int phi_index_cx = previous_residue->lookup(" C  ", clipper::MM::ANY);
+    int phi_index_n = monomer.lookup(" N  ", clipper::MM::ANY);
+    int phi_index_ca = monomer.lookup(" CA ", clipper::MM::ANY);
+    int phi_index_c = monomer.lookup(" C  ", clipper::MM::ANY);
+
+    if (phi_index_cx >= 0 && phi_index_ca >= 0 && phi_index_c >= 0 && phi_index_n >= 0)
+    {
+        clipper::Coord_orth coord_cx = previous_residue->operator[](phi_index_cx).coord_orth();
+        clipper::Coord_orth coord_n = monomer[phi_index_n].coord_orth();
+        clipper::Coord_orth coord_ca = monomer[phi_index_ca].coord_orth();
+        clipper::Coord_orth coord_c = monomer[phi_index_c].coord_orth();
+        phi = clipper::Coord_orth::torsion(coord_cx, coord_n, coord_ca, coord_c);
+    }
+
+    clipper::ftype psi = clipper::Util::nan();
+    int psi_index_n = monomer.lookup(" N  ", clipper::MM::ANY);
+    int psi_index_ca = monomer.lookup(" CA ", clipper::MM::ANY);
+    int psi_index_c = monomer.lookup(" C  ", clipper::MM::ANY);
+    int psi_index_nx = next_residue->lookup(" N  ", clipper::MM::ANY);
+
+    if (psi_index_ca >= 0 && psi_index_c >= 0 && psi_index_n >= 0 && psi_index_nx >= 0)
+    {
+        clipper::Coord_orth coord_n = monomer[psi_index_n].coord_orth();
+        clipper::Coord_orth coord_ca = monomer[psi_index_ca].coord_orth();
+        clipper::Coord_orth coord_c = monomer[psi_index_c].coord_orth();
+        clipper::Coord_orth coord_nx = next_residue->operator[](psi_index_nx).coord_orth();
+        psi = clipper::Coord_orth::torsion(coord_n, coord_ca, coord_c, coord_nx);
+    }
+
+    ResidueResult result;
+    float probability = 0;
+    if (clipper::Util::is_nan(phi) || clipper::Util::is_nan(psi))
+    {
+        result.value = -100;
+    } else { 
+        probability = scale * calculate_probability(monomer, phi, psi);
+    }
+
+    result.value = probability;
+    result.name = monomer.type();
+    result.seqnum = monomer.seqnum();
+    result.metric = get_name();
+    result.type = get_type();
+    return result;
 }
 
 RunMode CalculatedMetrics::check_for_files()
@@ -224,8 +315,6 @@ CalculatedMetrics::CalculatedMetrics(std::vector<AbstractMetric *> &metrics)
         throw std::runtime_error("A PDB file could not be found.");
     }
 
-    std::cout << "Run mode = " << mode << std::endl;
-
     load_pdb();
 
     if (mode == RunMode::PDB_MTZ)
@@ -239,8 +328,13 @@ CalculatedMetrics::CalculatedMetrics(std::vector<AbstractMetric *> &metrics)
 
 bool CalculatedMetrics::check_for_continuous_residues(clipper::MPolymer &current_chain, int r)
 {
-    if (r <= 1 || r > current_chain.size())
+    if (r < 1)
         return false;
+
+    if (r >= current_chain.size() - 1)
+    {
+        return false;
+    }
 
     clipper::MMonomer previous_residue = current_chain[r - 1];
     clipper::MMonomer current_residue = current_chain[r];
@@ -287,12 +381,14 @@ ResultsBinding CalculatedMetrics::calculate()
             {
                 ResidueResult residue_result;
 
-                std::cout << ptr->get_name() << std::endl;
-                if (ptr->use_surrounding_residues)
+                if (ptr->get_use_surrounding_residues())
                 {
                     if (!check_for_continuous_residues(m_mol[c], r))
+                    {
                         continue;
-                    residue_result = ptr->score(m_mol[c][r - 1], m_mol[c][r], m_mol[c][r + 1], &m_xmap);
+                    }
+
+                    residue_result = ptr->score(m_mol[c][r], &m_xmap, &m_mol[c][r - 1], &m_mol[c][r + 1]);
                 }
                 else
                 {

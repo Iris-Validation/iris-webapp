@@ -57,7 +57,7 @@ add_library(
 )
 
 add_executable(iris_exec ${CMAKE_CURRENT_SOURCE_DIR}/src/iris-bind.cpp)
-set_target_properties (iris_exec PROPERTIES OUTPUT_NAME iris )
+set_target_properties (iris_exec PROPERTIES OUTPUT_NAME iris-api )
 target_link_options(iris_exec PRIVATE --preload-file data@/ -sDEMANGLE_SUPPORT=1 -sASSERTIONS=2 -fexceptions -sALLOW_MEMORY_GROWTH=1 --bind -sFORCE_FILESYSTEM=1 -sMODULARIZE=1 -sEXPORT_NAME=iris_module -sEXPORTED_RUNTIME_METHODS=['FS'] -sMODULARIZE=1 -sEXPORT_ES6=1 --bind -lnodefs.js --profiling)
 
 target_link_directories(iris_exec
@@ -103,6 +103,6 @@ install(TARGETS iris_lib
     PUBLIC_HEADER DESTINATION include/iris
 )
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ciris.wasm
-${CMAKE_CURRENT_BINARY_DIR}/ciris.js
-DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/webserver/wasm)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iris-api.wasm
+${CMAKE_CURRENT_BINARY_DIR}/iris-api.js
+DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
