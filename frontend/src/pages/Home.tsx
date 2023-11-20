@@ -4,7 +4,6 @@ import { Header } from '../layouts/Header';
 import { Information } from '../components/Information/Information';
 
 //@ts-ignore
-// import iris_module from "../api/iris-api.js"
 import iris_module from "../api/iris-api.js";
 // const iris_module = lazy(() => import("../api/iris"))
 
