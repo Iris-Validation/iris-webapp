@@ -12,7 +12,9 @@ export default {
           secondary: '#4a5568',
           tertiary: '#F4F9FF',
           hover: "#e0e7ff",
-          darkgray: "#B6BAC6"
+          darkgray: "#B6BAC6",
+          lightgray: "#808080",
+          black: "#000000"
 
       },
       extend: {
