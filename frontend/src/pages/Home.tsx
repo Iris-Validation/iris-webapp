@@ -57,16 +57,19 @@ export default function HomeSection() {
             }
             else {
                 iris_module().then(async (Module: any) => {
-                    var reflectionReader = new FileReader();
-
-                    const reflection_promises = () => {
+                    const reflection_promise = (Module: any) => {
                         return new Promise((resolve, reject) => { 
                             const reader = new FileReader(); 
                             const file_name = `input.mtz`
 
                             reader.onload = () => {
                                 console.log("Writing", file_name)
-                                Module['FS_createDataFile']('/', file_name, reader.result, true, true, true)
+                                // @ts-ignore
+                                let map_data = new Uint8Array(reader.result);
+                                Module['FS_createDataFile']('/', file_name, map_data, true, true, true)
+
+                                setMtzData(map_data)
+
                                 resolve(file_name)
                             }
 
@@ -78,18 +81,6 @@ export default function HomeSection() {
                                 reader.readAsArrayBuffer(reflectionFile)
                             }
                         })
-                    }
-
-                    reflectionReader.onload = async () => {
-                        let reader = reflectionReader.result;
-                        // @ts-ignore
-                        let map_data = new Uint8Array(reader);
-                        setMtzData(map_data)
-                        Module['FS_createDataFile']('/', "input.mtz", map_data, true, true, true)
-                    }
-
-                    if (reflectionFile) {
-                        reflectionReader.readAsArrayBuffer(reflectionFile)
                     }
 
                     if (!coordinateFile) return
@@ -117,7 +108,7 @@ export default function HomeSection() {
                     })
 
                     await Promise.all(reader_promises);
-                    await Promise.all([reflection_promises])
+                    await reflection_promise(Module)
 
                     console.log("Sending for results")
                     let backend_call = Module.calculate(coordinateFile.length > 1)
@@ -152,7 +143,7 @@ const main_props: HeaderProps = {
     loadingText: loadingText,
     fileContent: fileContent,
     fallback: fallback,
-    mtzData: mtzData,
+    // mtzData: mtzData,
     failureText: failureText,
     results: results
 }
