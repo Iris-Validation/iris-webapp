@@ -57,7 +57,7 @@ export interface HeaderProps {
     loadingText: string,
     fileContent: string | ArrayBuffer,
     fallback: boolean,
-    mtzData: Uint8Array | null,
+    // mtzData: Uint8Array | null,
     failureText: string
     results: any
 }
