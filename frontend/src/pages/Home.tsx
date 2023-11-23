@@ -18,7 +18,7 @@ export default function HomeSection() {
     const [reflectionFile, setReflectionFile] = useState<File | null>(null);
     const [PDBCode, setPDBCode] = useState<string>("")
     const [fileContent, setFileContent] = useState<string | ArrayBuffer>("")
-    const [mtzData, setMtzData] = useState<Uint8Array | null>(null)
+    // const [mtzData, setMtzData] = useState<Uint8Array | null>(null)
     // const [mapData, setMapData] = useState<Uint8Array | null>(null)
     const [submit, setSubmit] = useState<boolean>(false);
     const [loadingText, setLoadingText] = useState<string>("Validating Glycans...");
@@ -68,7 +68,7 @@ export default function HomeSection() {
                                 let map_data = new Uint8Array(reader.result);
                                 Module['FS_createDataFile']('/', file_name, map_data, true, true, true)
 
-                                setMtzData(map_data)
+                                // setMtzData(map_data)
 
                                 resolve(file_name)
                             }
