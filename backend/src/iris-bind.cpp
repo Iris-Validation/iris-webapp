@@ -9,8 +9,8 @@
 
 using namespace emscripten; 
 
-ResultsBinding calculate() {
-
+MultiResultsBinding calculate(bool multiple_files) {
+  std::cout << "Calculating with multiple file selection set to " << multiple_files << std::endl;
     AverageBFactorMetric* average_b_factor_metric = new AverageBFactorMetric;
     MaxBFactorMetric* max_b_factor_metric = new MaxBFactorMetric;
     MainChainFit* main_chain_fit_metric = new MainChainFit;
@@ -25,15 +25,22 @@ ResultsBinding calculate() {
             ramachandran_metric
     };
 
-    CalculatedMetrics calculated_metrics = CalculatedMetrics(metrics);
-    ResultsBinding results = calculated_metrics.calculate();
+    MultiResultsBinding multi_results_binding; 
+
+    CalculatedMetrics calculated_metrics_1 = CalculatedMetrics(metrics, "/input1.pdb");
+    multi_results_binding.results.push_back(calculated_metrics_1.calculate());
+
+    if (multiple_files) {
+      CalculatedMetrics calculated_metrics_2 = CalculatedMetrics(metrics, "/input2.pdb");
+      multi_results_binding.results.push_back(calculated_metrics_2.calculate());
+    }
 
     delete average_b_factor_metric;
     delete max_b_factor_metric; 
     delete main_chain_fit_metric;
     delete side_chain_fit_metric;
     delete ramachandran_metric;
-    return results;
+    return multi_results_binding;
 }
 
 EMSCRIPTEN_BINDINGS(iris_module) { 
@@ -56,7 +63,13 @@ EMSCRIPTEN_BINDINGS(iris_module) {
 
   value_object<ResultsBinding>("ResultsBinding")
   .field("result", &ResultsBinding::result)
-  .field("chain_labels", &ResultsBinding::chain_labels);
+  .field("chain_labels", &ResultsBinding::chain_labels)
+  .field("file_name", &ResultsBinding::file_name);
 
-  function("test", &calculate);
+  register_vector<ResultsBinding>("vector<ResultsBinding>");
+  value_object<MultiResultsBinding>("MultiResultsBinding")
+    .field("results", &MultiResultsBinding::results);
+  
+
+  function("calculate", &calculate);
 }

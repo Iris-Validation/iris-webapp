@@ -9,7 +9,18 @@ export default function UploadButton(props: UploadButtonProps) {
                 let ext = splitname[splitname.length - 1]
 
                 if (ext == "pdb" || ext == "cif" || ext == "mmcif") {
-                    props.setCoordinateFile(e.target.files[i])
+                    if (!props.coordinateFile) { 
+                        props.setCoordinateFile([e.target.files[i]])
+                    }
+                    else {
+                        if (props.coordinateFile.length == 2) { 
+                            props.setCoordinateFile([props.coordinateFile[1], e.target.files[i]])
+                        } 
+                        else { 
+                            props.setCoordinateFile([...props.coordinateFile, e.target.files[i]])
+
+                        }
+                    }
                 }
                 else if (ext == "mtz") {
                     props.setReflectionFile(e.target.files[i])

@@ -48,8 +48,8 @@ export interface HeaderProps {
     setResetApp: Dispatch<SetStateAction<boolean>>,
     PDBCode: string,
     setPDBCode: Dispatch<SetStateAction<string>>,
-    coordinateFile: File | null,
-    setCoordinateFile: Dispatch<SetStateAction<File | null>>,
+    coordinateFile: File[] | null,
+    setCoordinateFile: Dispatch<SetStateAction<File[] | null>>,
     reflectionFile: File | null,
     setReflectionFile: Dispatch<SetStateAction<File | null>>,
     submit: boolean,
@@ -63,7 +63,8 @@ export interface HeaderProps {
 }
 
 export interface UploadButtonProps { 
-    setCoordinateFile: Dispatch<SetStateAction<File | null>>,
+    coordinateFile: File[],
+    setCoordinateFile: Dispatch<SetStateAction<File[] | null>>,
     setReflectionFile: Dispatch<SetStateAction<File | null>>
 }
 

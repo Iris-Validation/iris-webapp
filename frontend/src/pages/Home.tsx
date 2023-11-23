@@ -14,7 +14,7 @@ import { HeaderProps } from "../interface/interface"
 import { fetch_map, fetch_pdb } from "../utils/fetch_from_pdb";
 
 export default function HomeSection() {
-    const [coordinateFile, setCoordinateFile] = useState<File | null>(null);
+    const [coordinateFile, setCoordinateFile] = useState<File[] | null>(null);
     const [reflectionFile, setReflectionFile] = useState<File | null>(null);
     const [PDBCode, setPDBCode] = useState<string>("")
     const [fileContent, setFileContent] = useState<string | ArrayBuffer>("")
@@ -56,21 +56,28 @@ export default function HomeSection() {
                 })
             }
             else {
-                iris_module().then((Module: any) => {
-                    var coordinateReader = new FileReader();
+                iris_module().then(async (Module: any) => {
                     var reflectionReader = new FileReader();
 
-                    coordinateReader.onload = () => {
-                        Module['FS_createDataFile']('/', "input.pdb", coordinateReader.result, true, true, true)
+                    const reflection_promises = () => {
+                        return new Promise((resolve, reject) => { 
+                            const reader = new FileReader(); 
+                            const file_name = `input.mtz`
 
-                        let x = Module.test()
+                            reader.onload = () => {
+                                console.log("Writing", file_name)
+                                Module['FS_createDataFile']('/', file_name, reader.result, true, true, true)
+                                resolve(file_name)
+                            }
 
-                        setResults(x);
-                    }
+                            reader.onerror = (error) => { 
+                                reject(error)
+                            }
 
-                    if (coordinateFile) {
-                        coordinateReader.readAsText(coordinateFile);
-
+                            if (reflectionFile) {
+                                reader.readAsArrayBuffer(reflectionFile)
+                            }
+                        })
                     }
 
                     reflectionReader.onload = async () => {
@@ -85,48 +92,79 @@ export default function HomeSection() {
                         reflectionReader.readAsArrayBuffer(reflectionFile)
                     }
 
+                    if (!coordinateFile) return
+
+                    const reader_promises = coordinateFile.map((item, index) => {
+                        return new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+
+                            const file_name = `input${index + 1}.pdb`
+                            reader.onload = () => {
+                                console.log("Writing", file_name)
+                                Module['FS_createDataFile']('/', file_name, reader.result, true, true, true)
+                                resolve(file_name)
+                            }
+
+                            reader.onerror = (error) => { 
+                                reject(error)
+                            }
+
+                            if (coordinateFile) {
+                                reader.readAsText(item)
+                            }
+                        })
+
+                    })
+
+                    await Promise.all(reader_promises);
+                    await Promise.all([reflection_promises])
+
+                    console.log("Sending for results")
+                    let backend_call = Module.calculate(coordinateFile.length > 1)
+                    setResults(backend_call.results)
                 })
-            }
+}
         }
-        load_data()
+load_data()
     }, [submit])
 
-    useEffect(() => {
-        setReflectionFile(null)
-        setCoordinateFile(null)
-        setSubmit(false)
-        setFallBack(false)
-        setResetApp(false)
-        setPDBCode("")
-        setResults(null)
-    }, [resetApp])
+useEffect(() => {
+    setReflectionFile(null)
+    setCoordinateFile(null)
+    setSubmit(false)
+    setFallBack(false)
+    setResetApp(false)
+    setPDBCode("")
+    setResults(null)
+}, [resetApp])
 
-    const main_props: HeaderProps = {
-        resetApp: resetApp,
-        setResetApp: setResetApp,
-        PDBCode: PDBCode,
-        setPDBCode: setPDBCode,
-        coordinateFile: coordinateFile,
-        setCoordinateFile: setCoordinateFile,
-        reflectionFile: reflectionFile,
-        setReflectionFile: setReflectionFile,
-        submit: submit,
-        setSubmit: setSubmit,
-        loadingText: loadingText,
-        fileContent: fileContent,
-        fallback: fallback,
-        mtzData: mtzData,
-        failureText: failureText,
-        results: results
-    }
+const main_props: HeaderProps = {
+    resetApp: resetApp,
+    setResetApp: setResetApp,
+    PDBCode: PDBCode,
+    setPDBCode: setPDBCode,
+    coordinateFile: coordinateFile,
+    setCoordinateFile: setCoordinateFile,
+    reflectionFile: reflectionFile,
+    setReflectionFile: setReflectionFile,
+    submit: submit,
+    setSubmit: setSubmit,
+    loadingText: loadingText,
+    fileContent: fileContent,
+    fallback: fallback,
+    mtzData: mtzData,
+    failureText: failureText,
+    results: results
+}
 
-    return (
-        <>
-            <Header {...main_props} />
-            <BorderElement topColor={"#e0e1dd"} bottomColor={"#F4F9FF"} reverse={false}></BorderElement>
-            <Information />
-            <BorderElement topColor={"#F4F9FF"} bottomColor={"#e0e1dd"} reverse={true}></BorderElement>
-            <Footer></Footer>
-        </>
-    )
+return (
+    <>
+    
+        <Header {...main_props} />
+        <BorderElement topColor={"#e0e1dd"} bottomColor={"#F4F9FF"} reverse={false}></BorderElement>
+        <Information />
+        <BorderElement topColor={"#F4F9FF"} bottomColor={"#e0e1dd"} reverse={true}></BorderElement>
+        <Footer></Footer>
+    </>
+)
 }

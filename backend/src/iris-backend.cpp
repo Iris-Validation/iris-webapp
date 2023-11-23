@@ -306,21 +306,24 @@ void CalculatedMetrics::load_map()
     file.close_read();
 }
 
-CalculatedMetrics::CalculatedMetrics(std::vector<AbstractMetric *> &metrics)
+CalculatedMetrics::CalculatedMetrics(std::vector<AbstractMetric *> &metrics, const std::string& pdb_path)
 {
+    m_pdb_path = pdb_path;
 
-    RunMode mode = check_for_files();
-    if (mode == RunMode::ERROR)
+    m_mode = check_for_files();
+    if (m_mode == RunMode::ERROR)
     {
         throw std::runtime_error("A PDB file could not be found.");
     }
 
+    std::cout << "Running metric calculation in mode " << m_mode << std::endl;
+
     load_pdb();
 
-    if (mode == RunMode::PDB_MTZ)
+    if (m_mode == RunMode::PDB_MTZ)
         load_mtz();
 
-    if (mode == RunMode::PDB_MAP)
+    if (m_mode == RunMode::PDB_MAP)
         load_map();
 
     m_metrics = metrics;
@@ -379,6 +382,10 @@ ResultsBinding CalculatedMetrics::calculate()
         {
             for (auto *ptr : m_metrics)
             {
+                if (ptr->requires_map() && m_mode == 0) {
+                    // Requires a map but no map provided -> continue
+                    continue;
+                }
                 ResidueResult residue_result;
 
                 if (ptr->get_use_surrounding_residues())
@@ -399,6 +406,7 @@ ResultsBinding CalculatedMetrics::calculate()
         }
         binding.chain_labels.emplace_back(m_mol[c].id());
         binding.result.emplace_back(chain_result);
+        binding.file_name = m_pdb_path;
     }
     return binding;
 }

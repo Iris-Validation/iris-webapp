@@ -24,27 +24,36 @@ function extract_metric_values(results: any) {
 }
 
 function parse_results(results: any) {
-    let result = results.result;
 
-    let data: Record<string, Record<string, Array<number>>> = {}
-    for (let i = 0; i < result.size(); i++) {
-        let chain_info = result.get(i);
-        let chain_name = chain_info.chain;
-        let results = chain_info.results;
 
-        let chain_data: Record<string, Array<number>> = {}
-        for (let j = 0; j < results.size(); j++) {
-            let residue_result = results.get(j);
-            if (residue_result.seqnum in chain_data) {
-                chain_data[residue_result.seqnum].push(residue_result);
+    let data: Record<string, Record<string, Record<string, Array<number>>>> = {}
+
+    for (let result_index = 0; result_index < results.size(); result_index++) {
+
+        let result_info = results.get(result_index);
+        let result = result_info.result;
+        data[result_info.file_name] = {}
+        for (let i = 0; i < result.size(); i++) {
+
+            let chain_info = result.get(i);
+            let chain_name = chain_info.chain;
+            let results = chain_info.results;
+            let chain_data: Record<string, Array<number>> = {}
+            for (let j = 0; j < results.size(); j++) {
+                let residue_result = results.get(j);
+                if (residue_result.seqnum in chain_data) {
+                    chain_data[residue_result.seqnum].push(residue_result);
+                }
+                else {
+                    chain_data[residue_result.seqnum] = [residue_result];
+                }
             }
-            else {
-                chain_data[residue_result.seqnum] = [residue_result];
-            }
+
+            data[result_info.file_name][chain_name] = chain_data;
         }
-
-        data[chain_name] = chain_data;
     }
+
+    console.log(data)
 
     return data;
 }
@@ -69,6 +78,10 @@ export default function Iris(props: IrisProps) {
     const [chainListSet, setChainListSet] = useState(false);
     const [chainList, setChainList] = useState<Array<string>>([""]);
     const [selectedChain, setSelectedChain] = useState<string>("");
+
+    const [fileList, setFileList] = useState<Array<string>>([""]);
+    const [selectedFile, setSelectedFile] = useState<string>("");
+
     const [dataLength, setDataLength] = useState<number>();
 
     const [rings, setRings] = useState<Array<any>>();
@@ -110,15 +123,17 @@ export default function Iris(props: IrisProps) {
 
         var chain_list = []
         // @ts-ignore
-        for (let i = 0; i < props.results.chain_labels.size(); i++) {
+        for (let i = 0; i < props.results.get(0).chain_labels.size(); i++) {
             // @ts-ignore
-            chain_list.push(props.results.chain_labels.get(i))
+            chain_list.push(props.results.get(0).chain_labels.get(i))
         }
         //
         setChainListSet(true)
         setChainList(chain_list)
         setSelectedChain(chain_list[0])
 
+        setFileList(Object.keys(data))
+        setSelectedFile(Object.keys(data)[0])
 
     }, [])
 
@@ -128,7 +143,21 @@ export default function Iris(props: IrisProps) {
         if (!combinedData) return
         if (!selectedChain) return
 
-        let current_chain_data = combinedData[selectedChain]
+        let current_selected_chain = selectedChain;
+        let new_file_chains = Object.keys(combinedData[selectedFile])
+        setChainList(new_file_chains)
+        for (const chain in new_file_chains) {
+            if (new_file_chains[chain] == current_selected_chain) {
+                setSelectedChain(new_file_chains[chain])
+                break;
+            }
+            else {
+                setSelectedChain(new_file_chains[0])
+            }
+        }
+
+
+        let current_chain_data = combinedData[selectedFile][selectedChain]
         if (!current_chain_data) return
 
         let metrics = extract_metric_values(current_chain_data)
@@ -164,7 +193,7 @@ export default function Iris(props: IrisProps) {
         setRings(current_rings)
         setRingTextData(current_ring_text)
 
-    }, [selectedChain])
+    }, [selectedChain, selectedFile])
 
     function handle_mouse_move(e: any) {
         var svg = document.getElementById("svg");
@@ -226,6 +255,30 @@ export default function Iris(props: IrisProps) {
                 <ChainSelectionButtons {...chainSelectionButtonsProps} />
 
                 <span className='text-xl text-white ml-16 my-2 w-64'>Residue: {selectedResidue}</span>
+
+                {fileList.length > 1 ? <div className='flex align-middle h-6 my-auto'>
+
+                    <span className="mr-3 text-sm font-medium text-gray-900 dark:text-gray-300 text-ellipsis overflow-hidden">{fileList[0]}</span>
+
+                    <label className="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" className="sr-only peer" onClick={() => {
+                        if (fileList[0] == selectedFile) {
+                            setSelectedFile(fileList[1])
+                        } else {
+                            setSelectedFile(fileList[0])
+                        }
+
+                    }} />
+                        <div className="w-11 h-6 bg-tertiary peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                    </label>
+
+                    <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300 text-ellipsis overflow-hidden">{fileList[1]}</span>
+
+                    </div>
+                    :
+                    <></>
+                }
+
             </div>
 
             <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlnsXlink="http://www.w3.org/1999/xlink" width="1000" height="1000" viewBox="0 0 1000 1000" onMouseMove={(e) => { handle_mouse_move(e) }}>
