@@ -28,9 +28,9 @@ export default function HomeSection() {
     const [results, setResults] = useState<any>(null)
 
     async function run_iris(Module: any) {
-        let x = Module.test();
+        let backend_call = Module.calculate(false);
 
-        setResults(x);
+        setResults(backend_call.results);
         setFailureText("")
     }
 
@@ -50,7 +50,7 @@ export default function HomeSection() {
 
                 iris_module().then((Module: any) => {
                     Module['FS_createDataFile']('/', "input.map", map_data, true, true, true)
-                    Module['FS_createDataFile']('/', "input.pdb", pdb_response, true, true, true)
+                    Module['FS_createDataFile']('/', "input1.pdb", pdb_response, true, true, true)
 
                     run_iris(Module)
                 })

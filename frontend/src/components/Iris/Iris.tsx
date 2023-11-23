@@ -25,7 +25,6 @@ function extract_metric_values(results: any) {
 
 function parse_results(results: any) {
 
-
     let data: Record<string, Record<string, Record<string, Array<number>>>> = {}
 
     for (let result_index = 0; result_index < results.size(); result_index++) {
@@ -52,8 +51,6 @@ function parse_results(results: any) {
             data[result_info.file_name][chain_name] = chain_data;
         }
     }
-
-    console.log(data)
 
     return data;
 }
@@ -97,7 +94,6 @@ export default function Iris(props: IrisProps) {
         { fill: "#669D31", stroke: "#71B340" },
         { fill: "#634B66", stroke: "#9590A8" },
         { fill: "#1a759f", stroke: "#1e6091" },
-
     ]
 
     function get_current_residue(angle: number) {
