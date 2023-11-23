@@ -36,7 +36,7 @@ export default function Submit(props: SubmitProps) {
             bg-gray-50 flex-grow-0 ">
             
                 <p>File uploaded:</p>
-                <div id='filelist' className="flex flex-col items-center text-center justify-between h-full w-full overflow-y-auto overflow-x-hidden">
+                <div id='filelist' className="flex flex-col items-center text-center h-full w-full overflow-y-auto overflow-x-hidden">
                 {getFileList()}
                 
                 </div>

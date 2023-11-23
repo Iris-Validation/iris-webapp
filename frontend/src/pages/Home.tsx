@@ -26,6 +26,7 @@ export default function HomeSection() {
     const [fallback, setFallBack] = useState<boolean>(false)
     const [failureText, setFailureText] = useState<string>("")
     const [results, setResults] = useState<any>(null)
+    const [fileNames, setFileNames] = useState<Array<string>>();
 
     async function run_iris(Module: any) {
         let backend_call = Module.calculate(false);
@@ -85,6 +86,9 @@ export default function HomeSection() {
 
                     if (!coordinateFile) return
 
+                    let file_names = coordinateFile.map((item) => {return item.name})
+                    setFileNames(file_names)
+                    
                     const reader_promises = coordinateFile.map((item, index) => {
                         return new Promise((resolve, reject) => {
                             const reader = new FileReader();
@@ -104,7 +108,6 @@ export default function HomeSection() {
                                 reader.readAsText(item)
                             }
                         })
-
                     })
 
                     await Promise.all(reader_promises);
@@ -145,7 +148,8 @@ const main_props: HeaderProps = {
     fallback: fallback,
     // mtzData: mtzData,
     failureText: failureText,
-    results: results
+    results: results,
+    fileNames: fileNames
 }
 
 return (

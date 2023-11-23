@@ -33,6 +33,7 @@ interface IrisResults {
 }
 export interface IrisProps { 
     results: IrisResults
+    fileNames: Array<string> | null
 }
 
 export interface Metric {
@@ -60,11 +61,12 @@ export interface HeaderProps {
     // mtzData: Uint8Array | null,
     failureText: string
     results: any
+    fileNames: Array<string> | null
 }
 
 export interface UploadButtonProps { 
     coordinateFile: File[],
-    setCoordinateFile: Dispatch<SetStateAction<File[] | null>>,
+    setCoordinateFile: any,
     setReflectionFile: Dispatch<SetStateAction<File | null>>
 }
 
