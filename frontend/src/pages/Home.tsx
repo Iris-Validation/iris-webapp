@@ -81,6 +81,9 @@ export default function HomeSection() {
                             if (reflectionFile) {
                                 reader.readAsArrayBuffer(reflectionFile)
                             }
+                            else {
+                                resolve("no file supplied")
+                            }
                         })
                     }
 
