@@ -15,8 +15,6 @@ export default function Upload(props: HeaderProps) {
     }, [props.resetApp])
 
     useEffect(() => { 
-        console.log(props.coordinateFile, props.reflectionFile)
-
         if (!props.coordinateFile && props.reflectionFile) { 
             setShowSubmit(true)
             setShowUploadAgain(true)
@@ -31,6 +29,13 @@ export default function Upload(props: HeaderProps) {
             setAllowSubmit(false)
             setShowPDBFetch(true)
             return
+        }
+
+        if (props.coordinateFile.length == 1 && props.reflectionFile) {
+            setShowSubmit(true)
+            setShowUploadAgain(true)
+            setAllowSubmit(true)
+            setShowPDBFetch(false)
         }
 
         if (props.coordinateFile.length == 2 && props.reflectionFile) {
