@@ -89,11 +89,11 @@ export default function Iris(props: IrisProps) {
 
 
     const colours = [
-        { fill: "#ff758f", stroke: "#ff4d6d" },
-        { fill: "#1a759f", stroke: "#1e6091" },
-        { fill: "#669D31", stroke: "#71B340" },
-        { fill: "#634B66", stroke: "#9590A8" },
-        { fill: "#1a759f", stroke: "#1e6091" },
+        { fill: "#FF8B85", stroke: "#FF8B85" },
+        { fill: "#F5AF00", stroke: "#F5AF00" },
+        { fill: "#72C0A6", stroke: "#72C0A6" },
+        { fill: "#9FB0D0", stroke: "#9FB0D0" },
+        { fill: "#9A8ABC", stroke: "#9A8ABC" },
     ]
 
     function get_current_residue(angle: number) {

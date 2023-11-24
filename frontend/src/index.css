@@ -18,9 +18,9 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #B6BAC6;
+  background-color: #A6A99E;
   border-radius: 14px;
-  border: 3px solid #B6BAC6;
+  border: 3px solid #A6A99E;
 }
 
 
@@ -31,12 +31,12 @@
     /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
     /* font-family: "OpenSans";   */
     --primary: #e0e1dd;
-    --secondary: #e0e7ff;
+    --secondary: #F4F9FF;
     line-height: 1.5;
     font-weight: 400;
 
     /* color-scheme: light dark; */
-    background-color: #D6D9E5;
+    background-color: #F4F9FF;
 
     color: rgb(255, 255, 255);
 
@@ -51,7 +51,7 @@
 
 body {
     /* background-color: rgb(51 65 85 1); */
-    background-color: #D6D9E5;
+    background-color: #F4F9FF;
     margin: 0;
     padding: 0;
 }
