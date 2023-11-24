@@ -9,7 +9,18 @@ export default function UploadButton(props: UploadButtonProps) {
                 let ext = splitname[splitname.length - 1]
 
                 if (ext == "pdb" || ext == "cif" || ext == "mmcif") {
-                    props.setCoordinateFile(e.target.files[i])
+                    if (!props.coordinateFile) { 
+                        props.setCoordinateFile([e.target.files[i]])
+                    }
+                    else {
+                        if (props.coordinateFile.length == 2) { 
+                            props.setCoordinateFile([props.coordinateFile[1], e.target.files[i]])
+                        } 
+                        else { 
+                            props.setCoordinateFile([...props.coordinateFile, e.target.files[i]])
+
+                        }
+                    }
                 }
                 else if (ext == "mtz") {
                     props.setReflectionFile(e.target.files[i])
@@ -54,7 +65,7 @@ export default function UploadButton(props: UploadButtonProps) {
                     <p className="text-sm text-gray-500 dark:text-gray-400">PDB, mmCIF or MTZ.<br />Files will never be
                         sent externally.</p>
                 </div>
-                <input id="dropzone-file" type="file" className="hidden" accept=".pdb,.mmcif,.cif,.mtz"
+                <input id="dropzone-file" type="file" className="hidden" accept=".pdb,.mmcif,.cif,.mtz" multiple
                     onChange={fileUpload} />
             </label>
                 : <label className="flex flex-col items-center justify-center w-full p-12 h-64 border-2 border-gray-300  rounded-lg cursor-pointer hover:bg-hover border-gray-600">

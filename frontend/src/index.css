@@ -1,12 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Poppins:wght@600&display=swap');
 
 @tailwind base;
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #B6BAC6;
+  border-radius: 14px;
+  border: 3px solid #B6BAC6;
+}
+
+
 @tailwind components;
 @tailwind utilities;
 
 :root {
     /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
     /* font-family: "OpenSans";   */
+    --primary: #e0e1dd;
+    --secondary: #e0e7ff;
     line-height: 1.5;
     font-weight: 400;
 

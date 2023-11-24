@@ -15,7 +15,30 @@ export default function Upload(props: HeaderProps) {
     }, [props.resetApp])
 
     useEffect(() => { 
-        if (props.coordinateFile && props.reflectionFile) {
+        if (!props.coordinateFile && props.reflectionFile) { 
+            setShowSubmit(true)
+            setShowUploadAgain(true)
+            setAllowSubmit(false)
+            setShowPDBFetch(false)
+            return
+        } 
+
+        if (!props.coordinateFile && !props.reflectionFile) { 
+            setShowSubmit(false)
+            setShowUploadAgain(true)
+            setAllowSubmit(false)
+            setShowPDBFetch(true)
+            return
+        }
+
+        if (props.coordinateFile.length == 1 && props.reflectionFile) {
+            setShowSubmit(true)
+            setShowUploadAgain(true)
+            setAllowSubmit(true)
+            setShowPDBFetch(false)
+        }
+
+        if (props.coordinateFile.length == 2 && props.reflectionFile) {
             setShowSubmit(true)
             setShowUploadAgain(false)
             setAllowSubmit(true)
@@ -29,22 +52,11 @@ export default function Upload(props: HeaderProps) {
             setShowPDBFetch(false)
         }
 
-        if (!props.coordinateFile && props.reflectionFile) { 
-            setShowSubmit(true)
-            setShowUploadAgain(true)
-            setAllowSubmit(false)
-            setShowPDBFetch(false)
-        } 
-
-        if (!props.coordinateFile && !props.reflectionFile) { 
-            setShowSubmit(false)
-            setShowUploadAgain(true)
-            setAllowSubmit(false)
-            setShowPDBFetch(true)
-        }
+        
     }, [props.coordinateFile, props.reflectionFile])
 
     const uploadButtonProps: UploadButtonProps = {
+        coordinateFile: props.coordinateFile,
         setCoordinateFile: props.setCoordinateFile,
         setReflectionFile: props.setReflectionFile
     }

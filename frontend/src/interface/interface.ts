@@ -33,6 +33,7 @@ interface IrisResults {
 }
 export interface IrisProps { 
     results: IrisResults
+    fileNames: Array<string> | null
 }
 
 export interface Metric {
@@ -48,8 +49,8 @@ export interface HeaderProps {
     setResetApp: Dispatch<SetStateAction<boolean>>,
     PDBCode: string,
     setPDBCode: Dispatch<SetStateAction<string>>,
-    coordinateFile: File | null,
-    setCoordinateFile: Dispatch<SetStateAction<File | null>>,
+    coordinateFile: File[] | null,
+    setCoordinateFile: Dispatch<SetStateAction<File[] | null>>,
     reflectionFile: File | null,
     setReflectionFile: Dispatch<SetStateAction<File | null>>,
     submit: boolean,
@@ -57,13 +58,15 @@ export interface HeaderProps {
     loadingText: string,
     fileContent: string | ArrayBuffer,
     fallback: boolean,
-    mtzData: Uint8Array | null,
+    // mtzData: Uint8Array | null,
     failureText: string
     results: any
+    fileNames: Array<string> | null
 }
 
 export interface UploadButtonProps { 
-    setCoordinateFile: Dispatch<SetStateAction<File | null>>,
+    coordinateFile: File[],
+    setCoordinateFile: any,
     setReflectionFile: Dispatch<SetStateAction<File | null>>
 }
 

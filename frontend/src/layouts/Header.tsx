@@ -26,7 +26,7 @@ export function Header(props: HeaderProps) {
                             <Upload {...props} />
                                 : props.results === null ?
                                     <Loading loadingText={props.loadingText} /> :
-                                        <Iris results={props.results}></Iris>
+                                        <Iris results={props.results} fileNames={props.fileNames}></Iris>
                                     }
                     </Suspense>
                     : <></>

@@ -24,6 +24,12 @@ struct ResultsBinding
 {
     std::vector<ChainResult> result;
     std::vector<std::string> chain_labels;
+    std::string file_name;
+};
+
+struct MultiResultsBinding
+{
+    std::vector<ResultsBinding> results;
 };
 
 struct AbstractMetric
@@ -36,6 +42,7 @@ struct AbstractMetric
     virtual bool get_use_surrounding_residues() const = 0;
     virtual std::string get_name() const = 0;
     virtual std::string get_type() const = 0;
+    virtual bool requires_map() const = 0;
 };
 
 struct AverageBFactorMetric : public AbstractMetric
@@ -49,6 +56,7 @@ struct AverageBFactorMetric : public AbstractMetric
 
     std::string get_name() const { return "Average B Factor"; }
     std::string get_type() const { return "continuous"; }
+    bool requires_map() const { return false; }
 };
 
 struct MaxBFactorMetric : public AbstractMetric
@@ -61,6 +69,7 @@ struct MaxBFactorMetric : public AbstractMetric
     bool get_use_surrounding_residues() const { return false; }
     std::string get_name() const { return "Max B Factor"; }
     std::string get_type() const { return "continuous"; }
+    bool requires_map() const { return false; }
 };
 
 struct MainChainFit : public AbstractMetric
@@ -73,6 +82,7 @@ struct MainChainFit : public AbstractMetric
     bool get_use_surrounding_residues() const { return false; }
     std::string get_name() const { return "Main Chain Fit"; }
     std::string get_type() const { return "continuous"; }
+    bool requires_map() const { return true; }
 };
 
 struct SideChainFit : public AbstractMetric
@@ -85,6 +95,7 @@ struct SideChainFit : public AbstractMetric
     bool get_use_surrounding_residues() const { return false; }
     std::string get_name() const { return "Side Chain Fit"; }
     std::string get_type() const { return "continuous"; }
+    bool requires_map() const { return true; }
 };
 
 struct RamachandranMetric : public AbstractMetric
@@ -100,6 +111,7 @@ struct RamachandranMetric : public AbstractMetric
     bool get_use_surrounding_residues() const { return true; }
     std::string get_name() const { return "Ramachandran"; }
     std::string get_type() const { return "continuous"; }
+    bool requires_map() const { return false; }
 };
 
 enum RunMode
@@ -113,7 +125,7 @@ enum RunMode
 class CalculatedMetrics
 {
 public:
-    CalculatedMetrics(std::vector<AbstractMetric *> &metrics);
+    CalculatedMetrics(std::vector<AbstractMetric *> &metrics, const std::string &pdb_path);
 
     ResultsBinding calculate();
 
@@ -129,7 +141,9 @@ private:
     clipper::MiniMol m_mol;
     clipper::Xmap<float> m_xmap;
 
-    std::string m_pdb_path = "/input.pdb";
+    RunMode m_mode;
+
+    std::string m_pdb_path;
     std::string m_mtz_path = "/input.mtz";
     std::string m_map_path = "/input.map";
 };
