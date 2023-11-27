@@ -159,9 +159,9 @@ return (
     <>
     
         <Header {...main_props} />
-        <BorderElement topColor={"#e0e1dd"} bottomColor={"#F4F9FF"} reverse={false}></BorderElement>
+        <BorderElement topColor={"#e0e1dd"} bottomColor={"#FFFFFF"} reverse={false}></BorderElement>
         <Information />
-        <BorderElement topColor={"#F4F9FF"} bottomColor={"#e0e1dd"} reverse={true}></BorderElement>
+        <BorderElement topColor={"#FFFFFF"} bottomColor={"#e0e1dd"} reverse={true}></BorderElement>
         <Footer></Footer>
     </>
 )

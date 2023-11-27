@@ -10,8 +10,8 @@ export default {
           gray: "#e0e1dd", // platinum background
           primary: '#12161E', // black
           secondary: '#4a5568', // dark gray
-          tertiary: '#F4F9FF', // offwhite
-          hover: "#F4F9FF", // offwhite
+          tertiary: '#FFFFFF', // offwhite
+          hover: "#FFFFFF", // offwhite
           darkgray: "#B6BAC6",
           lightgray: "#808080",
           black: "#000000",
