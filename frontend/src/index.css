@@ -31,12 +31,12 @@
     /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
     /* font-family: "OpenSans";   */
     --primary: #e0e1dd;
-    --secondary: #F4F9FF;
+    --secondary: #FFFFFF;
     line-height: 1.5;
     font-weight: 400;
 
     /* color-scheme: light dark; */
-    background-color: #F4F9FF;
+    background-color: #FFFFFF;
 
     color: rgb(255, 255, 255);
 
@@ -51,7 +51,7 @@
 
 body {
     /* background-color: rgb(51 65 85 1); */
-    background-color: #F4F9FF;
+    background-color: #FFFFFF;
     margin: 0;
     padding: 0;
 }
