@@ -40,4 +40,4 @@ jobs:
       - uses: teknatha136/actions-google-chat-text-message@main
         with:
           google-chat-webhook: ${{ secrets.WEBHOOK_URL }}
-          text-message: Hello,\nThis is a test message.\nMessage sent by ${{ github.actor }}
+          text-message: ${{ github.actor }} has successfully merged a change into Iris.\nThis message was generated due to a ${{ github.event_name }}.\nView the change at ${{ github.repositoryUrl }}\n - GitHub 
