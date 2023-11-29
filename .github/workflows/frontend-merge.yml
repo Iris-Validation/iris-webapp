@@ -35,9 +35,9 @@ jobs:
           local-dir: frontend/public_html/
           server-dir: ${{ secrets.ftp_server_dir }}/
 
-      - name: "Notify Google"
-        if: ${{ inputs.fail_intentionally }}
-        uses: 'google-github-actions/sent-google-chat-webhook@v0.0.1'
+      - name: Notify Google
+        uses: actions/checkout@v3
+      - uses: teknatha136/actions-google-chat-text-message@main
         with:
-          webhook_url: '${{ secrets.WEBHOOK_URL }}'
-          mention: "<users/all>"
+          google-chat-webhook: ${{ secrets.WEBHOOK_URL }}
+          text-message: Hello,\nThis is a test message.\nMessage sent by ${{ github.actor }}
