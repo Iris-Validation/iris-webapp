@@ -51,5 +51,5 @@ jobs:
         uses: teknatha136/actions-google-chat-text-message@main
         with:
           google-chat-webhook: ${{ secrets.WEBHOOK_URL }}
-          text-message: ${{ github.actor }} attempted to merge a change into Iris, but the automatic deployment failed.\nThis message was generated due to a ${{ github.event_name }}.\nLink to pull request ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.number }} \m- GitHub 
+          text-message: ${{ github.actor }} attempted to merge a change into Iris, but the automatic deployment failed.\nThis message was generated due to a ${{ github.event_name }}.\nLink ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} \n- GitHub 
 
