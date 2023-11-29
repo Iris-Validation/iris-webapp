@@ -41,7 +41,6 @@ jobs:
         with:
           google-chat-webhook: ${{ secrets.WEBHOOK_URL }}
           text-message: ${{ github.actor }} has successfully merged a change into Iris.\nThis message was generated due to a ${{ github.event_name }}.\n - GitHub 
-
   debug:
     runs-on: ubuntu-latest
     if: ${{ failure() }}
