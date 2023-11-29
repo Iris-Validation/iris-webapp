@@ -92,7 +92,7 @@ export default function HomeSection() {
                     if (!coordinateFile) return
 
                     let file_names = coordinateFile.map((item) => {return item.name})
-                    setFileNames(file_names)
+                    setFileNames(file_names) 
                     
                     const reader_promises = coordinateFile.map((item) => {
                         return new Promise((resolve, reject) => {
