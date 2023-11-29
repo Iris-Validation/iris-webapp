@@ -9,8 +9,9 @@
 
 using namespace emscripten; 
 
-MultiResultsBinding calculate(bool multiple_files) {
-  std::cout << "Calculating with multiple file selection set to " << multiple_files << std::endl;
+MultiResultsBinding calculate(bool multiple_files, std::string file_name1, std::string file_name2) {
+
+    std::cout << "Calculating with multiple file selection set to " << multiple_files << std::endl;
     AverageBFactorMetric* average_b_factor_metric = new AverageBFactorMetric;
     MaxBFactorMetric* max_b_factor_metric = new MaxBFactorMetric;
     MainChainFit* main_chain_fit_metric = new MainChainFit;
@@ -27,11 +28,11 @@ MultiResultsBinding calculate(bool multiple_files) {
 
     MultiResultsBinding multi_results_binding; 
 
-    CalculatedMetrics calculated_metrics_1 = CalculatedMetrics(metrics, "/input1.pdb");
+    CalculatedMetrics calculated_metrics_1 = CalculatedMetrics(metrics, file_name1);
     multi_results_binding.results.push_back(calculated_metrics_1.calculate());
 
     if (multiple_files) {
-      CalculatedMetrics calculated_metrics_2 = CalculatedMetrics(metrics, "/input2.pdb");
+      CalculatedMetrics calculated_metrics_2 = CalculatedMetrics(metrics, file_name2);
       multi_results_binding.results.push_back(calculated_metrics_2.calculate());
     }
 

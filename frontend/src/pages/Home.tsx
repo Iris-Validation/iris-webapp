@@ -21,15 +21,15 @@ export default function HomeSection() {
     // const [mtzData, setMtzData] = useState<Uint8Array | null>(null)
     // const [mapData, setMapData] = useState<Uint8Array | null>(null)
     const [submit, setSubmit] = useState<boolean>(false);
-    const [loadingText, setLoadingText] = useState<string>("Validating Glycans...");
+    const [loadingText, setLoadingText] = useState<string>("Loading...");
     const [resetApp, setResetApp] = useState<boolean>(false)
     const [fallback, setFallBack] = useState<boolean>(false)
     const [failureText, setFailureText] = useState<string>("")
     const [results, setResults] = useState<any>(null)
     const [fileNames, setFileNames] = useState<Array<string>>();
 
-    async function run_iris(Module: any) {
-        let backend_call = Module.calculate(false);
+    async function run_iris(Module: any, file_name: string) {
+        let backend_call = Module.calculate(false, file_name, "");
 
         setResults(backend_call.results);
         setFailureText("")
@@ -38,7 +38,6 @@ export default function HomeSection() {
     useEffect(() => {
         async function load_data() {
             if (PDBCode != "") {
-                console.log(PDBCode)
                 setLoadingText(`Fetching ${PDBCode.toUpperCase()} from the PDB`)
 
                 let map_response = await fetch_map(PDBCode)
@@ -49,12 +48,15 @@ export default function HomeSection() {
                 setFileContent(pdb_data)
                 setLoadingText("Generating Iris Report...")
 
+                const file_name = `${PDBCode}.pdb`
                 iris_module().then((Module: any) => {
                     Module['FS_createDataFile']('/', "input.map", map_data, true, true, true)
-                    Module['FS_createDataFile']('/', "input1.pdb", pdb_response, true, true, true)
+                    Module['FS_createDataFile']('/', file_name, pdb_response, true, true, true)
 
-                    run_iris(Module)
+                    run_iris(Module, file_name)
                 })
+
+                setFileNames([file_name])
             }
             else {
                 iris_module().then(async (Module: any) => {
@@ -92,15 +94,14 @@ export default function HomeSection() {
                     let file_names = coordinateFile.map((item) => {return item.name})
                     setFileNames(file_names)
                     
-                    const reader_promises = coordinateFile.map((item, index) => {
+                    const reader_promises = coordinateFile.map((item) => {
                         return new Promise((resolve, reject) => {
                             const reader = new FileReader();
 
-                            const file_name = `input${index + 1}.pdb`
                             reader.onload = () => {
-                                console.log("Writing", file_name)
-                                Module['FS_createDataFile']('/', file_name, reader.result, true, true, true)
-                                resolve(file_name)
+                                console.log("Writing", item.name)
+                                Module['FS_createDataFile']('/', item.name, reader.result, true, true, true)
+                                resolve(item.name)
                             }
 
                             reader.onerror = (error) => { 
@@ -113,11 +114,11 @@ export default function HomeSection() {
                         })
                     })
 
-                    await Promise.all(reader_promises);
+                    let filenames = await Promise.all(reader_promises);
                     await reflection_promise(Module)
 
                     console.log("Sending for results")
-                    let backend_call = Module.calculate(coordinateFile.length > 1)
+                    let backend_call = Module.calculate(coordinateFile.length > 1, ...filenames)
                     setResults(backend_call.results)
                 })
 }

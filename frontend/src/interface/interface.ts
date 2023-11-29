@@ -36,10 +36,6 @@ export interface IrisProps {
     fileNames: Array<string> | null
 }
 
-export interface Metric {
-    array: Array<number>
-    type: string
-}
 
 import { Dispatch, SetStateAction } from "react";
 
