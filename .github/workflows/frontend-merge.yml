@@ -34,3 +34,10 @@ jobs:
           port: ${{ secrets.ftp_port }}
           local-dir: frontend/public_html/
           server-dir: ${{ secrets.ftp_server_dir }}/
+
+      - name: "Notify Google"
+        if: ${{ inputs.fail_intentionally }}
+        uses: 'google-github-actions/sent-google-chat-webhook@v0.0.1'
+        with:
+          webhook_url: '${{ secrets.WEBHOOK_URL }}'
+          mention: "<users/all>"
