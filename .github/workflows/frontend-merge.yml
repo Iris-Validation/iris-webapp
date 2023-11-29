@@ -45,8 +45,10 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps:
-      uses: actions/checkout@v3
-    - uses: teknatha136/actions-google-chat-text-message@main
-      with:
-        google-chat-webhook: ${{ secrets.WEBHOOK_URL }}
-        text-message: ${{ github.actor }} attempted to merge a change into Iris, but the automatic deployment failed.\nThis message was generated due to a ${{ github.event_name }}.\n - GitHub 
+      - uses: actions/checkout@v3
+      - name: Notify chat
+        uses: teknatha136/actions-google-chat-text-message@main
+        with:
+          google-chat-webhook: ${{ secrets.WEBHOOK_URL }}
+          text-message: ${{ github.actor }} attempted to merge a change into Iris, but the automatic deployment failed.\nThis message was generated due to a ${{ github.event_name }}.\n - GitHub 
+
