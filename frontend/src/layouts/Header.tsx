@@ -5,15 +5,29 @@ const Loading = lazy(() => import('../components/Loading/Loading'));
 const NavBar = lazy(() => import('./NavBar'));
 
 // import Iris from '../components/Iris/Iris';
-import {Iris, IrisData} from "iris-validation"
+import {Iris, IrisData, IrisAesthetics, IrisProps} from "iris-validation"
 import { HeaderProps } from '../interface/interface';
 
 export function Header(props: HeaderProps) {
 
+    const aes: IrisAesthetics = {
+        dimensions: [1000,1000],
+        center:[500,500], 
+        max_radius: 490, 
+        radius_change: 50, 
+        header: 40
+    }
+
     const results: IrisData = {
         data: props.results,
         chain_list: null,
-        file_list: props.fileNames
+        file_list: props.fileNames,
+    }
+
+    const iris_props: IrisProps = { 
+        results: results,
+        from_wasm: true,
+        aesthetics: aes
     }
 
     return (
@@ -26,7 +40,7 @@ export function Header(props: HeaderProps) {
                             <Upload {...props} />
                                 : props.results === null ?
                                     <Loading loadingText={props.loadingText} /> :
-                                        <Iris results={results} from_wasm={true} ></Iris>
+                                        <Iris {...iris_props}></Iris>
                                     }
                     </Suspense>
                     : <></>
