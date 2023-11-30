@@ -27,7 +27,10 @@ export function Header(props: HeaderProps) {
     const iris_props: IrisProps = { 
         results: results,
         from_wasm: true,
-        aesthetics: aes
+        aesthetics: aes, 
+        callback: (_) => { 
+            // console.log("RESIDUE CLICKED", residue)
+        }
     }
 
     return (
