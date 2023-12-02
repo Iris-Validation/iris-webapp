@@ -28,7 +28,15 @@ export default function PDBFetch(props: PDBFetch) {
                     </svg>
                     <p className="mb-2 text-md text-gray-500 dark:text-gray-400"><span className="font-semibold">Fetch from PDB</span>
                     </p>
-                    <input type="text" id="code" className="bg-gray-50 border border-gray-300 text-center text-gray-900 text-sm rounded-lg focus:border-3 block w-full p-2.5 my-2 " placeholder="5FJI" required/>
+                    <input type="text" id="code" className="bg-gray-50 border border-gray-300 text-center text-gray-900 text-sm rounded-lg focus:border-3 block w-full p-2.5 my-2 " placeholder="5FJI" required
+                    onKeyDown={(e) => {
+                        if(e.key === 'Enter') {
+                            let element = document.getElementById("code") as HTMLInputElement
+                            if (element)
+                                setPDB(element.value)
+                        }
+                    }}
+                    />
                     <button type="button" id="fetch" className="bg-gray-50 hover:bg-hover border font-bold  border-gray-300 text-gray-900 text-sm rounded-lg  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     onClick={
                         () => {
