@@ -52,8 +52,11 @@ export function Header(props: HeaderProps) {
         results: results,
         from_wasm: true,
         aesthetics: aes,
-        callback: (_) => {
+        click_callback: (_) => {
             // console.log("RESIDUE CLICKED", residue)
+        },
+        hover_callback: (_) => {
+
         }
     }
 

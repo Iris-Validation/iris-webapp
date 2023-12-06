@@ -4,8 +4,9 @@ import { Header } from '../layouts/Header';
 import { Information } from '../components/Information/Information';
 
 //@ts-ignore
-import iris_module from "../api/iris-api.js";
-// const iris_module = lazy(() => import("../api/iris"))
+import iris_module from "iris-validation-backend"
+// import iris_module from "../_api/iris-api.js";
+// const iris_module = lazy(() => import("../_api/iris"))
 
 const Footer = lazy(() => import('../layouts/Footer'));
 const BorderElement = lazy(() => import('../layouts/BorderElement'));
@@ -29,7 +30,7 @@ export default function HomeSection() {
     const [fileNames, setFileNames] = useState<Array<string>>();
 
     async function run_iris(Module: any, file_name: string) {
-        let backend_call = Module.calculate(false, file_name, "");
+        let backend_call = Module.calculate_single_pdb(file_name, "", false);
 
         setResults(backend_call.results);
         setFailureText("")
@@ -42,7 +43,7 @@ export default function HomeSection() {
 
                 let map_response = await fetch_map(PDBCode)
                 let pdb_response = await fetch_pdb(PDBCode)
-                let map_data = new Uint8Array(map_response)
+                let map_data = new Uint8Array(map_response as unknown as ArrayBuffer)
                 let pdb_data = new Uint8Array(pdb_response as unknown as ArrayBuffer)
 
                 setFileContent(pdb_data)
@@ -115,10 +116,18 @@ export default function HomeSection() {
                     })
 
                     let filenames = await Promise.all(reader_promises);
-                    await reflection_promise(Module)
+                    let density_path = await reflection_promise(Module)
 
                     console.log("Sending for results")
-                    let backend_call = Module.calculate(coordinateFile.length > 1, ...filenames)
+                    let backend_call;
+                    if (filenames.length == 2) {
+                        backend_call = Module.calculate_multi_pdb(...filenames, density_path, true)
+                    }
+                    else {
+                        backend_call = Module.calculate_single_pdb(filenames[0], density_path, true)
+
+                    }
+                    setResults(backend_call.results)
                     setResults(backend_call.results)
                 })
 }
